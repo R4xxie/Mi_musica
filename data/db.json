@@ -1,0 +1,343 @@
+﻿{
+    "songs":  [
+                  {
+                      "id":  1,
+                      "title":  "A POR TODO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/A POR TODO.mp3"
+                  },
+                  {
+                      "id":  2,
+                      "title":  "AL BORDE",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/AL BORDE.mp3"
+                  },
+                  {
+                      "id":  3,
+                      "title":  "ALIOLI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/ALIOLI.mp3"
+                  },
+                  {
+                      "id":  4,
+                      "title":  "Bzrp Music Sessions, Vol. 54",
+                      "artist":  "Arcángel",
+                      "cover":  "",
+                      "src":  "audio/Arcángel： Bzrp Music Sessions, Vol. 54⧸66.mp3"
+                  },
+                  {
+                      "id":  5,
+                      "title":  "Atrevido",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Atrevido.mp3"
+                  },
+                  {
+                      "id":  6,
+                      "title":  "Background",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Background.mp3"
+                  },
+                  {
+                      "id":  7,
+                      "title":  "BOOKER T",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/BOOKER T.mp3"
+                  },
+                  {
+                      "id":  8,
+                      "title":  "C90 (Remix)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/C90 (Remix).mp3"
+                  },
+                  {
+                      "id":  9,
+                      "title":  "CANGURO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/CANGURO.mp3"
+                  },
+                  {
+                      "id":  10,
+                      "title":  "CSIpher (audio latino)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/CSIpher (audio latino).mp3"
+                  },
+                  {
+                      "id":  11,
+                      "title":  "Demasiadas Mujeres",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Demasiadas Mujeres.mp3"
+                  },
+                  {
+                      "id":  12,
+                      "title":  "Nueva Era",
+                      "artist":  "DUKI, Myke Towers",
+                      "cover":  "",
+                      "src":  "audio/DUKI, Myke Towers - Nueva Era.mp3"
+                  },
+                  {
+                      "id":  13,
+                      "title":  "DÁKITI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/DÁKITI.mp3"
+                  },
+                  {
+                      "id":  14,
+                      "title":  "Día De Pago",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Día De Pago.mp3"
+                  },
+                  {
+                      "id":  15,
+                      "title":  "Bzrp Music Sessions, Vol. 40",
+                      "artist":  "Eladio Carrion",
+                      "cover":  "",
+                      "src":  "audio/Eladio Carrion： Bzrp Music Sessions, Vol. 40⧸66.mp3"
+                  },
+                  {
+                      "id":  16,
+                      "title":  "FEEL ME？？",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/FEEL ME？？.mp3"
+                  },
+                  {
+                      "id":  17,
+                      "title":  "FLA",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/FLA.mp3"
+                  },
+                  {
+                      "id":  18,
+                      "title":  "flashes",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/flashes.mp3"
+                  },
+                  {
+                      "id":  19,
+                      "title":  "Fruto",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Fruto.mp3"
+                  },
+                  {
+                      "id":  20,
+                      "title":  "GIVENCHY",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/GIVENCHY.mp3"
+                  },
+                  {
+                      "id":  21,
+                      "title":  "Goteo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Goteo.mp3"
+                  },
+                  {
+                      "id":  22,
+                      "title":  "Hello Cotto",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Hello Cotto.mp3"
+                  },
+                  {
+                      "id":  23,
+                      "title":  "Hitboy",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Hitboy.mp3"
+                  },
+                  {
+                      "id":  24,
+                      "title":  "Foreign",
+                      "artist":  "Kidd Keo",
+                      "cover":  "",
+                      "src":  "audio/Kidd Keo - Foreign ｜ A COLORS SHOW.mp3"
+                  },
+                  {
+                      "id":  25,
+                      "title":  "Level Up",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Level Up.mp3"
+                  },
+                  {
+                      "id":  26,
+                      "title":  "Luna Llena",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Luna Llena.mp3"
+                  },
+                  {
+                      "id":  27,
+                      "title":  "los perros viejos olvidaron mirarse al espejo",
+                      "artist":  "Matiah Chinaski",
+                      "cover":  "",
+                      "src":  "audio/Matiah Chinaski - los perros viejos olvidaron mirarse al espejo [subtitulos].mp3"
+                  },
+                  {
+                      "id":  28,
+                      "title":  "Milagrosa",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Milagrosa.mp3"
+                  },
+                  {
+                      "id":  29,
+                      "title":  "Bzrp Music Sessions, Vol. 57",
+                      "artist":  "Milo J",
+                      "cover":  "",
+                      "src":  "audio/Milo J： Bzrp Music Sessions, Vol. 57⧸66.mp3"
+                  },
+                  {
+                      "id":  30,
+                      "title":  "Mmg 2",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Mmg 2.mp3"
+                  },
+                  {
+                      "id":  31,
+                      "title":  "Modo Sexo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Modo Sexo.mp3"
+                  },
+                  {
+                      "id":  32,
+                      "title":  "MONACO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/MONACO.mp3"
+                  },
+                  {
+                      "id":  33,
+                      "title":  "MORNING",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/MORNING.mp3"
+                  },
+                  {
+                      "id":  34,
+                      "title":  "Penas de Antaño",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Penas de Antaño.mp3"
+                  },
+                  {
+                      "id":  35,
+                      "title":  "Pensando En El Dream",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Pensando En El Dream.mp3"
+                  },
+                  {
+                      "id":  36,
+                      "title":  "Pico y Pala",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Pico y Pala.mp3"
+                  },
+                  {
+                      "id":  37,
+                      "title":  "Piso",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Piso.mp3"
+                  },
+                  {
+                      "id":  38,
+                      "title":  "Rara Vez",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Rara Vez.mp3"
+                  },
+                  {
+                      "id":  39,
+                      "title":  "Si La Calle Llama (Remix)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Si La Calle Llama (Remix).mp3"
+                  },
+                  {
+                      "id":  40,
+                      "title":  "TAMO AQUI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/TAMO AQUI.mp3"
+                  },
+                  {
+                      "id":  41,
+                      "title":  "TRANKY FUNKY",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/TRANKY FUNKY.mp3"
+                  },
+                  {
+                      "id":  42,
+                      "title":  "Triple Lavada",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Triple Lavada.mp3"
+                  },
+                  {
+                      "id":  43,
+                      "title":  "UN MONTÓN",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/UN MONTÓN.mp3"
+                  },
+                  {
+                      "id":  44,
+                      "title":  "Valores del West",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Valores del West.mp3"
+                  },
+                  {
+                      "id":  45,
+                      "title":  "Bzrp Music Sessions, Vol. 51",
+                      "artist":  "Villano Antillano",
+                      "cover":  "",
+                      "src":  "audio/Villano Antillano： Bzrp Music Sessions, Vol. 51⧸66.mp3"
+                  },
+                  {
+                      "id":  46,
+                      "title":  "Wo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Wo.mp3"
+                  },
+                  {
+                      "id":  47,
+                      "title":  "Zigzag",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Zigzag.mp3"
+                  }
+              ],
+    "playlists":  [
+                      {
+                          "name":  "Favoritas",
+                          "songs":  [
+                                        1,
+                                        2,
+                                        3
+                                    ]
+                      }
+                  ]
+}

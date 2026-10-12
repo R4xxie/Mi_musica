@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <title>Mi Música</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="logo">
+      <span class="logo-icon" aria-hidden="true">▶</span> Mi Música
+    </h1>
+  </header>
+
+  <main class="content">
+    <nav id="playlist-chips" class="chips" aria-label="Playlists" hidden></nav>
+    <div class="section-head">
+      <h2 id="section-title" class="section-title">Todas las canciones</h2>
+      <button id="btn-download" class="btn-download" type="button" hidden
+              aria-label="Descargar todas las canciones de esta playlist">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M11 4h2v8.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3zM5 18h14v2H5z"/></svg>
+        <span id="download-label">Descargar</span>
+      </button>
+    </div>
+    <section id="song-grid" class="grid" aria-live="polite">
+      <p class="status">Cargando canciones…</p>
+    </section>
+  </main>
+
+  <footer class="player" id="player" aria-label="Reproductor">
+    <!-- Barra de progreso (ancho completo) -->
+    <div class="progress" id="progress" role="slider" tabindex="0"
+         aria-label="Progreso de la canción"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-thumb" id="progress-thumb"></div>
+      </div>
+    </div>
+
+    <div class="player-inner">
+      <!-- Izquierda: info de la pista -->
+      <div class="now-playing">
+        <img id="player-cover" class="player-cover" alt="" hidden />
+        <div class="now-text">
+          <p id="player-title" class="now-title">Selecciona una canción</p>
+          <p id="player-artist" class="now-artist">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- Centro: controles -->
+      <div class="controls">
+        <button id="btn-prev" class="ctrl" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg>
+        </button>
+        <button id="btn-play" class="ctrl ctrl-main" aria-label="Reproducir">
+          <svg id="icon-play" viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" width="32" height="32" hidden><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <button id="btn-next" class="ctrl" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+        </button>
+        <span class="time"><span id="time-current">0:00</span> / <span id="time-total">0:00</span></span>
+      </div>
+
+      <!-- Derecha: volumen -->
+      <div class="volume">
+        <button id="btn-mute" class="ctrl" aria-label="Silenciar">
+          <svg id="icon-vol" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+          <svg id="icon-muted" viewBox="0 0 24 24" width="24" height="24" hidden><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9zm13.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg>
+        </button>
+        <input id="volume" class="volume-slider" type="range"
+               min="0" max="1" step="0.01" value="0.8"
+               aria-label="Volumen" />
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/zip.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
