@@ -1,93 +1,103 @@
-# Mi Música 🎵 (Reproductor Web Moderno)
+**Reproductor de música web moderno, ultrarrápido y responsivo con estética inspirada en plataformas de streaming.**  
+Construido 100% con Vanilla JavaScript, HTML5 y CSS3, sin frameworks pesados ni dependencias innecesarias.
 
-Reproductor de música web ultrarrápido con diseño moderno inspirado en YouTube Music, 100 % estático, sin frameworks pesados ni dependencias externas.
-
----
-
-## ✨ Novedades y Mejoras Implementadas
-
-1. **🍪 Sistema de Cookies por Visitante**:
-   - Cada usuario que entra a la web tiene sus propios **Favoritos** persistidos en cookies del navegador (`Store.favorites`).
-   - Se guarda el historial de canciones **escuchadas recientemente** (`Store.recent`).
-   - Recuerda preferencias personales: nivel de volumen, modo aleatorio (*shuffle*) y modo de repetición (*repeat*).
-   - Generación de un identificador anónimo de visitante (`uid`) en cookie para la futura sincronización en la nube.
-   - Banner de cookies discreto y amigable con botón de confirmación.
-
-2. **📂 Navegación por Playlists (Adiós a todo en una sola página)**:
-   - **Página de Inicio (`#/`)**: Presenta tarjetas elegantes para cada playlist, acceso directo a tu colección de **Tus Favoritos**, catálogo completo y carrusel de canciones recientes.
-   - **Vista de Detalle de Playlist (`#/playlist/:id`)**: Cabecera con carátula o mosaico, descripción, recuento de canciones, botón *"Reproducir Todo"* y botón *"Descargar ZIP"*.
-   - **Tus Favoritos (`#/playlist/favoritos`)**: Playlist dinámica que muestra en vivo las canciones que cada visitante marca con el corazón.
-   - **Barra Lateral Fija** (y navegación móvil inferior): Acceso instantáneo a Inicio, Búsqueda, Favoritos y a cada playlist disponible.
-   - **Buscador en Tiempo Real (`#/buscar`)**: Filtrado instantáneo por canción, artista o playlist con atajo de teclado `/`.
-
-3. **🎧 Reproductor y Controles Mejorados**:
-   - Barra de progreso fluida con arrastre táctil y visualización de buffer.
-   - **Modo Aleatorio (Shuffle)**: Mezcla la cola sin interrumpir la pista que está sonando.
-   - **Modo Repetir (Repeat)**: Ciclo entre *Apagado*, *Repetir Lista Completa* y *Repetir 1 Canción*.
-   - **MediaSession API**: Muestra carátula, nombre y artista en la pantalla de bloqueo de Android/iOS y en teclados o audífonos con botones multimedia.
-   - **Descargas Rápidas**: Descarga de canciones sueltas en MP3 o empaquetado instantáneo de la playlist en archivo `.zip` con lista `.m3u8` generada al vuelo en el navegador.
-
-4. **⚡ Arquitectura Desacoplada lista para Supabase**:
-   - Toda la lógica de datos está aislada en `js/data.js` (`window.DataSource`).
-   - El código ya incluye el cliente PostgREST nativo para conectar a Supabase sin necesidad de librerías externas.
-   - Se incluye el archivo `supabase_setup.sql` listo para crear las tablas y migrar todas las canciones actuales con un solo clic.
+</div>
 
 ---
 
-## 🚀 Cómo Probar en Local
+## 📖 Descripción
 
-Debido a las políticas de seguridad de los navegadores (`CORS`), `fetch()` requiere un servidor HTTP local en lugar de abrir el archivo directamente con `file://`.
+**Mi Música** es una aplicación web estática de reproducción de audio diseñada para ofrecer una experiencia fluida, elegante y sin interrupciones tanto en dispositivos móviles como en ordenadores de escritorio.
 
-### Opción 1: Con PowerShell (En Windows, no requiere instalar nada)
-Abre una terminal PowerShell en esta carpeta y ejecuta:
-```powershell
-.\server.ps1
-```
-Y abre tu navegador en: [http://localhost:8000](http://localhost:8000)
-
-### Opción 2: Con Python
-```bash
-python server.py
-```
-Y abre [http://localhost:8000](http://localhost:8000)
-
-*(Ambos servidores soportan **HTTP Range Requests**, lo cual es indispensable para adelantar y atrasar el audio sin que se reinicie).*
+Incorpora un sistema de navegación por rutas basado en Hash (SPA), persistencia de preferencias por usuario en el navegador, descargas individuales y en lote (.zip con lista .m3u8), y soporte nativo con la API MediaSession para integración con pantallas de bloqueo y teclas multimedia.
 
 ---
 
-## 🗄️ Guía para Conectar con Supabase y Subir Música a Storage
+## ✨ Características Principales
 
-### Paso 1: Ejecutar el SQL (Solo una vez)
-1. En tu proyecto de Supabase, ve al menú lateral izquierdo y entra en **SQL Editor**.
-2. Haz clic en **New query** (Nueva consulta).
-3. Abre el archivo [`supabase_setup.sql`](file:///c:/Users/angel/Desktop/reproductor-musica/supabase_setup.sql), copia todo su contenido y pégalo en el editor de Supabase.
-4. Presiona el botón verde **RUN**.
-   - Creará la tabla `songs` con la columna `genre` (Trap, Rap, Reggaetón, etc.).
-   - Configurará los permisos de lectura pública (RLS).
-   - Insertará todas tus canciones actuales con sus rutas listas para el Storage.
+### 🎨 Diseño y Experiencia de Usuario
+- **Estética Moderna & Dark Theme**: Interfaz limpia inspirada en YouTube Music con paleta de colores oscuros, sombras dinámicas y microinteracciones suaves.
+- **Totalmente Responsivo**: Barra lateral ergonómica en pantallas grandes y barra de navegación inferior optimizada para móviles.
+- **Enrutamiento SPA**: Navegación fluida sin recargas de página (`#/`, `#/buscar`, `#/playlist/:id`, `#/playlist/favoritos`).
 
-### Paso 2: Crear el Bucket de Storage para los MP3
-1. En Supabase, ve a **Storage** → **New bucket**.
-2. Nómbralo **`music`** y marca la casilla **Public bucket** (Obligatorio para que reproduzca audio en streaming).
-3. Dentro del bucket `music`, crea tus carpetas (`trap/`, `rap/`, `reggaeton/`) y sube tus archivos MP3 correspondientes.
+### 🎧 Reproductor de Audio Avanzado
+- **Controles Completos**: Barra de progreso con arrastre táctil interactivo, control de volumen y estado de buffer.
+- **Modo Aleatorio (Shuffle)**: Mezcla inteligente de la cola de reproducción sin interrumpir la pista actual.
+- **Modos de Repetición (Repeat)**: Ciclo entre apagado, repetir toda la lista o repetir la canción actual en bucle.
+- **MediaSession API**: Muestra el título, artista, álbum y carátula en la pantalla de bloqueo de Android/iOS y en teclados o auriculares con controles multimedia.
 
-### Paso 3: Conectar la aplicación web
-Abre [`js/data.js`](file:///c:/Users/angel/Desktop/reproductor-musica/js/data.js) y en las líneas 18 a 22 verás que tu URL ya está lista:
-```javascript
-const SUPABASE_CONFIG = {
-  url: "https://vjeknodqepfjlzkjanat.supabase.co",
-  anonKey: "PEGA_AQUI_TU_CLAVE_ANON", // Encuéntrala en Project Settings -> API
-  bucket: "music",
-};
+### 💖 Colección Personal y Preferencias
+- **Favoritos Dinámicos**: Marca canciones con un clic y accede a tu lista personalizada en tiempo real.
+- **Historial Reciente**: Registro de las últimas canciones escuchadas.
+- **Persistencia**: Recuerda volumen, estado de mute, modo aleatorio y modo de repetición para cada visitante.
+
+### 🔍 Búsqueda y Descargas
+- **Buscador en Tiempo Real**: Filtra instantáneamente por nombre de canción, artista o género con atajos de teclado rápidos.
+- **Descargas Individuales**: Guarda cualquier pista directamente en formato MP3.
+- **Empaquetado en Lote (ZIP + M3U8)**: Descarga listas completas generadas al vuelo en el navegador en un archivo `.zip` comprimido junto con su archivo de lista de reproducción `.m3u8`.
+
+---
+
+## ⌨️ Atajos de Teclado
+
+Para facilitar el control de la reproducción en ordenadores, la aplicación incluye atajos globales:
+
+| Tecla | Acción |
+| :--- | :--- |
+| <kbd>Espacio</kbd> | Reproducir / Pausar |
+| <kbd>/</kbd> | Enfocar la barra de búsqueda |
+| <kbd>S</kbd> | Activar / Desactivar modo aleatorio (*Shuffle*) |
+| <kbd>R</kbd> | Alternar modo de repetición (*Off / All / One*) |
+| <kbd>M</kbd> | Silenciar / Restaurar volumen (*Mute*) |
+| <kbd>→</kbd> | Adelantar 5 segundos |
+| <kbd>←</kbd> | Retroceder 5 segundos |
+| <kbd>Esc</kbd> | Desenfocar el campo de búsqueda |
+
+---
+
+## 📁 Estructura del Proyecto
+
+```text
+reproductor-musica/
+├── css/
+│   └── styles.css          # Estilos globales, variables CSS, layout y diseño responsivo
+├── data/
+│   └── db.json             # Catálogo de canciones y metadatos
+├── img/                    # Recursos visuales y carátulas
+├── js/
+│   ├── app.js              # Controlador principal, reproductor de audio y router SPA
+│   ├── data.js             # Capa desacoplada de origen de datos
+│   ├── storage.js          # Gestión de preferencias, favoritos e historial del usuario
+│   └── zip.js              # Generación de descargas ZIP y listas M3U8 en cliente
+├── index.html              # Estructura semántica principal de la aplicación
+└── README.md               # Documentación del proyecto
 ```
-Solo pega tu **`anonKey`** (que obtienes en Supabase en **Project Settings** ⚙️ → **API** → clave `anon`/`public`).
 
-### 🎵 ¿Cómo agregar géneros o canciones nuevas en el futuro?
-¡Ya no necesitas tocar código ni scripts!
-1. Subes tu archivo al Storage dentro de su carpeta (ej: `music/reggaeton/mi_cancion.mp3`).
-2. En Supabase vas a **Table Editor** → tabla `songs`, e insertas una fila con:
-   - `title`: Título de la canción
-   - `artist`: Nombre del artista
-   - `genre`: **`Reggaetón`** (o cualquier género nuevo: *Drill, Rock, Salsa...*)
-   - `src`: `reggaeton/mi_cancion.mp3`
-3. Al recargar la página, el reproductor **creará automáticamente la nueva categoría de género** en la pantalla de inicio y en el menú lateral.
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+- **HTML5**: Estructura semántica y elemento `<audio>`.
+- **CSS3**: Variables nativas, Flexbox, CSS Grid, Glassmorphism y animaciones aceleradas por hardware.
+- **JavaScript (ES6+)**: Lógica reactiva modular sin transpiladores ni frameworks.
+- **MediaSession API**: Integración con el sistema operativo y controles multimedia de dispositivos.
+- **JSZip**: Biblioteca cliente para compresión y generación de archivos `.zip`.
+- **Google Fonts (Outfit)**: Tipografía moderna y optimizada.
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones, reportes de errores y sugerencias son bienvenidos:
+
+1. Haz un **Fork** del proyecto.
+2. Crea una rama para tu funcionalidad (`git checkout -b feature/NuevaCaracteristica`).
+3. Realiza los cambios necesarios y haz commit (`git commit -m 'feat: Agregar nueva funcionalidad'`).
+4. Sube tu rama (`git push origin feature/NuevaCaracteristica`).
+5. Abre un **Pull Request**.
+
+---
+
+## 📄 Licencia
+
+Este proyecto se distribuye bajo la licencia MIT. Siéntete libre de utilizarlo, modificarlo y compartirlo.
