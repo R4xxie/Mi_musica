@@ -1,0 +1,1116 @@
+{
+    "songs":  [
+                  {
+                      "id":  1,
+                      "title":  "A POR TODO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/A POR TODO.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  2,
+                      "title":  "AL BORDE",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/AL BORDE.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  3,
+                      "title":  "ALIOLI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/ALIOLI.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  4,
+                      "title":  "Bzrp Music Sessions, Vol. 54",
+                      "artist":  "Arcángel",
+                      "cover":  "",
+                      "src":  "audio/Arcángel： Bzrp Music Sessions, Vol. 54⧸66.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  5,
+                      "title":  "Atrevido",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Atrevido.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  6,
+                      "title":  "Background",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Background.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  7,
+                      "title":  "BOOKER T",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/BOOKER T.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  8,
+                      "title":  "C90 (Remix)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/C90 (Remix).mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  9,
+                      "title":  "CANGURO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/CANGURO.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  10,
+                      "title":  "CSIpher (audio latino)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/CSIpher (audio latino).mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  11,
+                      "title":  "Demasiadas Mujeres",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Demasiadas Mujeres.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  12,
+                      "title":  "Nueva Era",
+                      "artist":  "DUKI, Myke Towers",
+                      "cover":  "",
+                      "src":  "audio/DUKI, Myke Towers - Nueva Era.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  13,
+                      "title":  "DÁKITI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/DÁKITI.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  14,
+                      "title":  "Día De Pago",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Día De Pago.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  15,
+                      "title":  "Bzrp Music Sessions, Vol. 40",
+                      "artist":  "Eladio Carrion",
+                      "cover":  "",
+                      "src":  "audio/Eladio Carrion： Bzrp Music Sessions, Vol. 40⧸66.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  16,
+                      "title":  "FEEL ME？？",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/FEEL ME？？.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  17,
+                      "title":  "FLA",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/FLA.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  18,
+                      "title":  "flashes",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/flashes.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  19,
+                      "title":  "Fruto",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Fruto.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  20,
+                      "title":  "GIVENCHY",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/GIVENCHY.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  21,
+                      "title":  "Goteo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Goteo.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  22,
+                      "title":  "Hello Cotto",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Hello Cotto.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  23,
+                      "title":  "Hitboy",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Hitboy.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  24,
+                      "title":  "Foreign",
+                      "artist":  "Kidd Keo",
+                      "cover":  "",
+                      "src":  "audio/Kidd Keo - Foreign ｜ A COLORS SHOW.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  25,
+                      "title":  "Level Up",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Level Up.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  26,
+                      "title":  "Luna Llena",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Luna Llena.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  27,
+                      "title":  "los perros viejos olvidaron mirarse al espejo",
+                      "artist":  "Matiah Chinaski",
+                      "cover":  "",
+                      "src":  "audio/Matiah Chinaski - los perros viejos olvidaron mirarse al espejo [subtitulos].mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  28,
+                      "title":  "Milagrosa",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Milagrosa.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  29,
+                      "title":  "Bzrp Music Sessions, Vol. 57",
+                      "artist":  "Milo J",
+                      "cover":  "",
+                      "src":  "audio/Milo J： Bzrp Music Sessions, Vol. 57⧸66.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  30,
+                      "title":  "Mmg 2",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Mmg 2.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  31,
+                      "title":  "Modo Sexo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Modo Sexo.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  32,
+                      "title":  "MONACO",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/MONACO.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  33,
+                      "title":  "MORNING",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/MORNING.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  34,
+                      "title":  "Penas de Antaño",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Penas de Antaño.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  35,
+                      "title":  "Pensando En El Dream",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Pensando En El Dream.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  36,
+                      "title":  "Pico y Pala",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Pico y Pala.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  37,
+                      "title":  "Piso",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Piso.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  38,
+                      "title":  "Rara Vez",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Rara Vez.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  39,
+                      "title":  "Si La Calle Llama (Remix)",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Si La Calle Llama (Remix).mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  40,
+                      "title":  "TAMO AQUI",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/TAMO AQUI.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  41,
+                      "title":  "TRANKY FUNKY",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/TRANKY FUNKY.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  42,
+                      "title":  "Triple Lavada",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Triple Lavada.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  43,
+                      "title":  "UN MONTÓN",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/UN MONTÓN.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  44,
+                      "title":  "Valores del West",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Valores del West.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  45,
+                      "title":  "Bzrp Music Sessions, Vol. 51",
+                      "artist":  "Villano Antillano",
+                      "cover":  "",
+                      "src":  "audio/Villano Antillano： Bzrp Music Sessions, Vol. 51⧸66.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  46,
+                      "title":  "Wo",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Wo.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id":  47,
+                      "title":  "Zigzag",
+                      "artist":  "Desconocido",
+                      "cover":  "",
+                      "src":  "audio/Zigzag.mp3",
+                      "genre":  "Rap - Trap"
+                  },
+                  {
+                      "id": 48,
+                      "title": "512",
+                      "artist": "Mora, Jhayco",
+                      "album": "Primer Dia de Clases",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/512.mp3"
+                  },
+                  {
+                      "id": 49,
+                      "title": "Ahora Es",
+                      "artist": "Wisin & Yandel",
+                      "album": "Wisin Vs Yandel \"Los Extraterrestres\"",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Ahora Es.mp3"
+                  },
+                  {
+                      "id": 50,
+                      "title": "Amor de Colegio",
+                      "artist": "Don Omar, Hector & Tito",
+                      "album": "The Kings Of The Beat Vol.2",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Amor de Colegio.mp3"
+                  },
+                  {
+                      "id": 51,
+                      "title": "Anda Sola",
+                      "artist": "Don Omar",
+                      "album": "Los Bandoleros Reloaded",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Anda Sola.mp3"
+                  },
+                  {
+                      "id": 52,
+                      "title": "ANDO",
+                      "artist": "Jere Klein, Gittobeatz",
+                      "album": "ANDO",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/ANDO.mp3"
+                  },
+                  {
+                      "id": 53,
+                      "title": "Aparentemente (feat. Arcangel & De La Ghetto)",
+                      "artist": "Yaga & Mackie, Arcangel, De La Ghetto",
+                      "album": "La Reunión",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Aparentemente (feat. Arcangel & De La Ghetto).mp3"
+                  },
+                  {
+                      "id": 54,
+                      "title": "Baila Morena",
+                      "artist": "Hector & Tito, Luny Tunes, Noriega",
+                      "album": "Latino! Greatest Hits - 56 Latin Top Hits",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Baila Morena (with Luny Tunes, Noriega).mp3"
+                  },
+                  {
+                      "id": 55,
+                      "title": "BEBE",
+                      "artist": "6ix9ine, Anuel AA",
+                      "album": "DUMMY BOY",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/BEBE.mp3"
+                  },
+                  {
+                      "id": 56,
+                      "title": "Borro Cassette",
+                      "artist": "Maluma",
+                      "album": "Pretty Boy, Dirty Boy",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Borro Cassette.mp3"
+                  },
+                  {
+                      "id": 57,
+                      "title": "Camuflaje",
+                      "artist": "Alexis & Fido",
+                      "album": "Perreología",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Camuflaje.mp3"
+                  },
+                  {
+                      "id": 58,
+                      "title": "Candy",
+                      "artist": "Plan B",
+                      "album": "Love and Sex",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Candy.mp3"
+                  },
+                  {
+                      "id": 59,
+                      "title": "Cojela Que Va Sin Jockey",
+                      "artist": "Daddy Yankee",
+                      "album": "Mas Flow",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Cojela Que Va Sin Jockey.mp3"
+                  },
+                  {
+                      "id": 60,
+                      "title": "Como Yo Le Doy (Spanglish Version)",
+                      "artist": "Pitbull, Don Miguelo",
+                      "album": "Dale",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Como Yo Le Doy (Spanglish Version).mp3"
+                  },
+                  {
+                      "id": 61,
+                      "title": "Culo",
+                      "artist": "Pitbull, Lil Jon",
+                      "album": "M.I.A.M.I.",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Culo.mp3"
+                  },
+                  {
+                      "id": 62,
+                      "title": "DEGENERE (feat. benny blanco)",
+                      "artist": "Myke Towers, benny blanco",
+                      "album": "LA PANTERA NEGRA",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/DEGENERE (feat. benny blanco).mp3"
+                  },
+                  {
+                      "id": 63,
+                      "title": "Dile - Reggaeton Latino",
+                      "artist": "Don Omar",
+                      "album": "Reggaeton Antiguo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Dile - Reggaeton Latino.mp3"
+                  },
+                  {
+                      "id": 64,
+                      "title": "Dile Que Tu Me Quieres",
+                      "artist": "Ozuna",
+                      "album": "Odisea",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Dile Que Tu Me Quieres.mp3"
+                  },
+                  {
+                      "id": 65,
+                      "title": "Dile",
+                      "artist": "Don Omar",
+                      "album": "The Last Don",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Dile.mp3"
+                  },
+                  {
+                      "id": 66,
+                      "title": "Down (Remix)",
+                      "artist": "R.K.M. & Ken-Y",
+                      "album": "Masterpiece : Commemorative Edition",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Down (Remix).mp3"
+                  },
+                  {
+                      "id": 67,
+                      "title": "El Perdedor",
+                      "artist": "Maluma",
+                      "album": "Pretty Boy, Dirty Boy",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/El Perdedor.mp3"
+                  },
+                  {
+                      "id": 68,
+                      "title": "En la Disco Bailoteo",
+                      "artist": "Wisin & Yandel",
+                      "album": "Desafio",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/En la Disco Bailoteo.mp3"
+                  },
+                  {
+                      "id": 69,
+                      "title": "EoO",
+                      "artist": "Bad Bunny",
+                      "album": "DeBÍ TiRAR MáS FOToS",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/EoO.mp3"
+                  },
+                  {
+                      "id": 70,
+                      "title": "Es un Secreto",
+                      "artist": "Plan B",
+                      "album": "House Of Pleasure",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Es un Secreto.mp3"
+                  },
+                  {
+                      "id": 71,
+                      "title": "Flow Natural",
+                      "artist": "Tito El Bambino, Beenie Man",
+                      "album": "Top Of The Line",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Flow Natural.mp3"
+                  },
+                  {
+                      "id": 72,
+                      "title": "Frikitona",
+                      "artist": "Plan B",
+                      "album": "Chosen Few: El Documental II",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Frikitona.mp3"
+                  },
+                  {
+                      "id": 73,
+                      "title": "Fuera Del Planeta (Remix)",
+                      "artist": "Eloy, Zion, Jowell & Randy",
+                      "album": "Fuera Del Planeta (Remix)",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Fuera Del Planeta (Remix).mp3"
+                  },
+                  {
+                      "id": 74,
+                      "title": "Gata Fiera (feat. Joan)",
+                      "artist": "Trebol Clan, Joan",
+                      "album": "Los Bacatranes",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Gata Fiera (feat. Joan).mp3"
+                  },
+                  {
+                      "id": 75,
+                      "title": "Gata Only",
+                      "artist": "FloyyMenor, Cris Mj",
+                      "album": "Gata Only",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Gata Only.mp3"
+                  },
+                  {
+                      "id": 76,
+                      "title": "Ginza",
+                      "artist": "J Balvin",
+                      "album": "Energía",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Ginza.mp3"
+                  },
+                  {
+                      "id": 77,
+                      "title": "Guatauba",
+                      "artist": "Plan B",
+                      "album": "Guatauba XXX",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Guatauba.mp3"
+                  },
+                  {
+                      "id": 78,
+                      "title": "He Querido Quererte",
+                      "artist": "Franco El Gorila, Tico El Inmigrante",
+                      "album": "Welcome To The Jungle",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/He Querido Quererte.mp3"
+                  },
+                  {
+                      "id": 79,
+                      "title": "Hey Mor",
+                      "artist": "Ozuna, Feid",
+                      "album": "OzuTochi",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Hey Mor.mp3"
+                  },
+                  {
+                      "id": 80,
+                      "title": "Igual Que Ayer",
+                      "artist": "Rakim & Ken-Y",
+                      "album": "Masterpiece: Nuestra Obra Maestra",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Igual Que Ayer.mp3"
+                  },
+                  {
+                      "id": 81,
+                      "title": "In Da Getto",
+                      "artist": "J Balvin, Skrillex",
+                      "album": "JOSE",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/In Da Getto.mp3"
+                  },
+                  {
+                      "id": 82,
+                      "title": "Ingles En Miami",
+                      "artist": "Rawayana, Manuel Turizo",
+                      "album": "¿Dónde Es El After?",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Ingles En Miami.mp3"
+                  },
+                  {
+                      "id": 83,
+                      "title": "Joga O Bum Bum Tam Tam",
+                      "artist": "MC Fioti",
+                      "album": "Joga O Bum Bum Tam Tam",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Joga O Bum Bum Tam Tam.mp3"
+                  },
+                  {
+                      "id": 84,
+                      "title": "Jordan",
+                      "artist": "Ryan Castro",
+                      "album": "Jordan",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Jordan.mp3"
+                  },
+                  {
+                      "id": 85,
+                      "title": "La Botella",
+                      "artist": "Mach & Daddy",
+                      "album": "Desde Abajo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/La Botella.mp3"
+                  },
+                  {
+                      "id": 86,
+                      "title": "LA FALDA",
+                      "artist": "Myke Towers",
+                      "album": "LVEU: VIVE LA TUYA... NO LA MIA",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/LA FALDA.mp3"
+                  },
+                  {
+                      "id": 87,
+                      "title": "La Matraca (Remix)",
+                      "artist": "Dani Flow, DJ NIÑOTE",
+                      "album": "La Matraca",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/La Matraca (Remix).mp3"
+                  },
+                  {
+                      "id": 88,
+                      "title": "MALA (feat. Anuel AA)",
+                      "artist": "6ix9ine, Anuel AA",
+                      "album": "DUMMY BOY",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/MALA (feat. Anuel AA).mp3"
+                  },
+                  {
+                      "id": 89,
+                      "title": "Mayor Que Yo - Reggaeton Latino",
+                      "artist": "Baby Ranks, Daddy Yankee, Wisin & Yandel, Hector El Father",
+                      "album": "Reggaeton Antiguo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Mayor Que Yo - Reggaeton Latino.mp3"
+                  },
+                  {
+                      "id": 90,
+                      "title": "Me Pones en Tension",
+                      "artist": "Zion & Lennox",
+                      "album": "The Noise \"La Biografía\"",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Me Pones en Tension.mp3"
+                  },
+                  {
+                      "id": 91,
+                      "title": "Me Voy Pa'l Party",
+                      "artist": "Nicky Jam",
+                      "album": "Conspiracion 2",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Me Voy Pa'l Party.mp3"
+                  },
+                  {
+                      "id": 92,
+                      "title": "Mujeriego",
+                      "artist": "Ryan Castro",
+                      "album": "Reggaetonea",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Mujeriego.mp3"
+                  },
+                  {
+                      "id": 93,
+                      "title": "No Me Conoce (Remix)",
+                      "artist": "Jhayco, J Balvin, Bad Bunny",
+                      "album": "Famouz",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/No Me Conoce (Remix).mp3"
+                  },
+                  {
+                      "id": 94,
+                      "title": "Noche De Sexo",
+                      "artist": "Wisin & Yandel, Romeo Santos",
+                      "album": "Pa'l Mundo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Noche De Sexo.mp3"
+                  },
+                  {
+                      "id": 95,
+                      "title": "Pa' Que Retozen",
+                      "artist": "Tego Calderon",
+                      "album": "El Abayarde",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Pa' Que Retozen.mp3"
+                  },
+                  {
+                      "id": 96,
+                      "title": "Parte & Choke",
+                      "artist": "Jombriel, Alex Krack, Jøtta",
+                      "album": "Parte & Choke",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Parte & Choke.mp3"
+                  },
+                  {
+                      "id": 97,
+                      "title": "Pegao",
+                      "artist": "Wisin & Yandel",
+                      "album": "Wisin Y Yandel Presentan: Los Vaqueros",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Pegao.mp3"
+                  },
+                  {
+                      "id": 98,
+                      "title": "Permitame",
+                      "artist": "Tony Dize, Yandel",
+                      "album": "Latin Party",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Permitame.mp3"
+                  },
+                  {
+                      "id": 99,
+                      "title": "Pose",
+                      "artist": "Daddy Yankee",
+                      "album": "Talento de Barrio",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Pose.mp3"
+                  },
+                  {
+                      "id": 100,
+                      "title": "Punto Y Aparte",
+                      "artist": "Tego Calderon",
+                      "album": "PR CD #3",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Punto Y Aparte.mp3"
+                  },
+                  {
+                      "id": 101,
+                      "title": "QLOO",
+                      "artist": "Young Cister, Kreamly",
+                      "album": "QLOO*",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/QLOO.mp3"
+                  },
+                  {
+                      "id": 102,
+                      "title": "Quiere Beber",
+                      "artist": "Anuel AA",
+                      "album": "Real Hasta la Muerte",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Quiere Beber.mp3"
+                  },
+                  {
+                      "id": 103,
+                      "title": "Quiero Bailar",
+                      "artist": "Ivy Queen",
+                      "album": "Flashback",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Quiero Bailar.mp3"
+                  },
+                  {
+                      "id": 104,
+                      "title": "Quiero Saber",
+                      "artist": "Ivy Queen",
+                      "album": "Diva",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Quiero Saber.mp3"
+                  },
+                  {
+                      "id": 105,
+                      "title": "Quizas",
+                      "artist": "Tony Dize",
+                      "album": "Wisin Y Yandel Presentan: Los Vaqueros",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Quizas.mp3"
+                  },
+                  {
+                      "id": 106,
+                      "title": "Reggaeton Latino",
+                      "artist": "Don Omar",
+                      "album": "Chosen Few El Documental",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Reggaeton Latino.mp3"
+                  },
+                  {
+                      "id": 107,
+                      "title": "Safaera",
+                      "artist": "Bad Bunny, Jowell & Randy, Ñengo Flow",
+                      "album": "YHLQMDLG",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Safaera.mp3"
+                  },
+                  {
+                      "id": 108,
+                      "title": "Salio El Sol",
+                      "artist": "Don Omar",
+                      "album": "King Of Kings",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Salio El Sol.mp3"
+                  },
+                  {
+                      "id": 109,
+                      "title": "Secunena",
+                      "artist": "Sayuri & Sopholov, Fuentes Prod",
+                      "album": "Secunena",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Secunena.mp3"
+                  },
+                  {
+                      "id": 110,
+                      "title": "Si No Le Contesto (Remix)",
+                      "artist": "Plan B, Tony Dize, Zion & Lennox",
+                      "album": "Pina Records Present #1 Exclusive Urban Remixes",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Si No Le Contesto (Remix).mp3"
+                  },
+                  {
+                      "id": 111,
+                      "title": "Si No Le Contesto",
+                      "artist": "Plan B",
+                      "album": "House Of Pleasure",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Si No Le Contesto.mp3"
+                  },
+                  {
+                      "id": 112,
+                      "title": "Siente El Boom",
+                      "artist": "Tito El Bambino, Randy",
+                      "album": "Chosen Few: El Documental II",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Siente El Boom.mp3"
+                  },
+                  {
+                      "id": 113,
+                      "title": "Siguelo Bailando",
+                      "artist": "Ozuna",
+                      "album": "Odisea",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Siguelo Bailando.mp3"
+                  },
+                  {
+                      "id": 114,
+                      "title": "Tacata",
+                      "artist": "Tiagz",
+                      "album": "TACATA",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Tacata.mp3"
+                  },
+                  {
+                      "id": 115,
+                      "title": "Ven Bailalo - Reggaeton Mix",
+                      "artist": "Angel & Khriz",
+                      "album": "Ven Bailalo (Reggaeton Mix)",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Ven Bailalo - Reggaeton Mix.mp3"
+                  },
+                  {
+                      "id": 116,
+                      "title": "Veo Veo",
+                      "artist": "Sayuri & Sopholov, Fuentes Prod",
+                      "album": "Veo Veo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Veo Veo.mp3"
+                  },
+                  {
+                      "id": 117,
+                      "title": "VITAMINA",
+                      "artist": "Jombriel, DFZM, Jøtta",
+                      "album": "VITAMINA",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/VITAMINA.mp3"
+                  },
+                  {
+                      "id": 118,
+                      "title": "X",
+                      "artist": "Nicky Jam, J Balvin",
+                      "album": "Íntimo",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/X.mp3"
+                  },
+                  {
+                      "id": 119,
+                      "title": "Yo No So Tu Marido",
+                      "artist": "Nicky Jam",
+                      "album": "Old School / New School",
+                      "genre": "Reggaeton",
+                      "cover": "",
+                      "src": "regueton/Yo No So Tu Marido.mp3"
+                  },
+                  {
+                      "id": 120,
+                      "title": "MIX NU DISCO 1",
+                      "artist": "Desconocido",
+                      "album": "Nu Disco",
+                      "genre": "Mix",
+                      "cover": "",
+                      "src": "mix/MIX NU DISCO 1.mp3"
+                  },
+                  {
+                      "id": 121,
+                      "title": "MIX NU DISCO 2",
+                      "artist": "Desconocido",
+                      "album": "Nu Disco",
+                      "genre": "Mix",
+                      "cover": "",
+                      "src": "mix/MIX NU DISCO 2.mp3"
+                  }
+              ],
+    "playlists":  [
+                      {
+                          "id":  "favoritas-top",
+                          "name":  "Favoritas de la Casa",
+                          "description":  "Selección destacada para empezar a escuchar.",
+                          "songs":  [
+                                        1,
+                                        2,
+                                        3,
+                                        7,
+                                        9,
+                                        11,
+                                        13,
+                                        21
+                                    ]
+                      },
+                      {
+                          "id":  "bzrp-sessions",
+                          "name":  "BZRP Music Sessions",
+                          "description":  "Las mejores sesiones con Arcángel, Eladio Carrión, Milo J y Villano Antillano.",
+                          "songs":  [
+                                        4,
+                                        15,
+                                        29,
+                                        45
+                                    ]
+                      },
+                      {
+                          "id":  "trap-latino",
+                          "name":  "Trap \u0026 Urbano",
+                          "description":  "Lo más pesado del trap, freestyle y ritmos callejeros.",
+                          "songs":  [
+                                        12,
+                                        20,
+                                        21,
+                                        22,
+                                        24,
+                                        32,
+                                        41,
+                                        42
+                                    ]
+                      },
+                      {
+                          "id":  "barrio-flow",
+                          "name":  "Flow \u0026 Letras",
+                          "description":  "Barras, hip-hop y clásicos para el camino.",
+                          "songs":  [
+                                        9,
+                                        11,
+                                        27,
+                                        34,
+                                        35,
+                                        43,
+                                        44,
+                                        47
+                                    ]
+                      },
+                      {
+                          "id":  "clasicos-reggaeton",
+                          "name":  "Clásicos del Reggaetón",
+                          "description":  "Los mejores palos del reggaetón.",
+                          "songs":  [
+                              48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+                              66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83,
+                              84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101,
+                              102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
+                              117, 118, 119
+                          ]
+                      }
+                  ]
+}
