@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-**Reproductor de música web moderno, ultrarrápido y responsivo con estética inspirada en plataformas de streaming.**  
-Construido 100% con Vanilla JavaScript, HTML5 y CSS3, sin frameworks pesados ni dependencias innecesarias.
 
-=======
 # 🎵 Mi Música
 
 <div align="center">
