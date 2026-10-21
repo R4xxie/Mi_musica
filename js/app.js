@@ -38,6 +38,14 @@
   const btnMute         = document.getElementById("btn-mute");
   const iconVol         = document.getElementById("icon-vol");
   const iconMuted       = document.getElementById("icon-muted");
+  const btnFade         = document.getElementById("btn-fade");
+
+  // Modos de interfaz
+  const themePicker     = document.getElementById("theme-picker");
+  const btnTheme        = document.getElementById("btn-theme");
+  const themeMenu       = document.getElementById("theme-menu");
+  const menuFade        = document.getElementById("menu-fade");
+  const themeMeta       = document.querySelector('meta[name="theme-color"]');
 
   /* ---------- Estado ---------- */
   const audio = new Audio();
@@ -56,6 +64,21 @@
   let repeatMode = "off"; // "off" | "all" | "one"
   let consecutiveErrors = 0;
   let downloadCtrl = null;// Cancelar descarga ZIP en curso
+
+  // Volumen y modo transición (fade in / fade out)
+  const FADE_SECONDS = 5;
+  let userVolume = 0.8;   // Volumen elegido por el usuario (slider)
+  let fadeEnabled = false;
+  let fadeGain = 1;       // Multiplicador 0..1 aplicado por el fade
+  let fadeRaf = 0;
+
+  // Modos de interfaz disponibles
+  const THEMES = {
+    dark:      { label: "Modo oscuro",             color: "#09090e" },
+    light:     { label: "Modo claro",              color: "#f4f4f8" },
+    halloween: { label: "Modo Halloween 🎃",       color: "#0b0710" },
+    criolla:   { label: "Modo Canción Criolla 🎸", color: "#fbf3e6" },
+  };
 
   const currentSong = () => (queueIndex >= 0 && queueIndex < queue.length ? queue[queueIndex] : null);
 
@@ -175,9 +198,11 @@
       }
     });
 
-    const savedVol = window.Store.prefs.get("vol", 0.8);
-    audio.volume = savedVol;
-    volume.value = savedVol;
+    const savedVol = Number(window.Store.prefs.get("vol", 0.8));
+    userVolume = Number.isFinite(savedVol) ? Math.min(1, Math.max(0, savedVol)) : 0.8;
+    if (userVolume > 0) lastVolume = userVolume;
+    volume.value = userVolume;
+    applyVolume();
     updateVolumeUI();
 
     isShuffle = !!window.Store.prefs.get("shuffle", false);
@@ -185,6 +210,11 @@
 
     repeatMode = window.Store.prefs.get("repeat", "off");
     applyRepeatModeUI(repeatMode);
+
+    applyTheme(window.Store.prefs.get("theme", "dark"), { animate: false });
+
+    fadeEnabled = !!window.Store.prefs.get("fade", false);
+    applyFadeUI();
   }
 
   /* ---------- Enrutador Hash (#/...) ---------- */
@@ -640,7 +670,7 @@
             <p class="song-title">${escapeHtml(song.title)}</p>
             <p class="song-artist">
               ${escapeHtml(song.artist)}
-              ${song.genre ? `<span style="display:inline-block; margin-left:8px; font-size:0.75rem; padding:1px 6px; border-radius:4px; background:rgba(255,255,255,0.08); color:var(--text-subtle);">${escapeHtml(song.genre)}</span>` : ""}
+              ${song.genre ? `<span class="genre-chip">${escapeHtml(song.genre)}</span>` : ""}
             </p>
           </div>
         </div>
@@ -705,6 +735,11 @@
     if (!song) return;
 
     audio.src = song.src;
+    if (fadeEnabled) {
+      // Arranca en silencio para que el fade in empiece desde 0
+      fadeGain = 0;
+      applyVolume();
+    }
     setPlayingUI(true);
     const playPromise = audio.play();
     if (playPromise !== undefined) {
@@ -834,6 +869,124 @@
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
+
+  /* ---------- Modo transición: fade in / fade out de 5 s ----------
+   * La ganancia se calcula a partir de la posición de la canción:
+   *   - primeros 5 s  -> sube de 0 a 1 (fade in)
+   *   - últimos 5 s   -> baja de 1 a 0 (fade out)
+   * Así funciona igual al saltar, adelantar o repetir.
+   */
+  function computeFadeGain() {
+    if (!fadeEnabled) return 1;
+    const t = audio.currentTime || 0;
+    const d = audio.duration;
+    if (!Number.isFinite(d) || d <= 0) return Math.min(1, t / FADE_SECONDS);
+    const len = Math.min(FADE_SECONDS, d / 2); // canciones muy cortas
+    return Math.max(0, Math.min(1, t / len, (d - t) / len));
+  }
+
+  function updateFade() {
+    fadeGain = computeFadeGain();
+    applyVolume();
+  }
+
+  // requestAnimationFrame para suavidad; timeupdate sirve de respaldo
+  // cuando la pestaña está en segundo plano (rAF se pausa).
+  function fadeLoop() {
+    updateFade();
+    fadeRaf = fadeEnabled && !audio.paused ? requestAnimationFrame(fadeLoop) : 0;
+  }
+
+  function startFadeLoop() {
+    if (fadeEnabled && !fadeRaf) fadeRaf = requestAnimationFrame(fadeLoop);
+  }
+
+  function applyFadeUI() {
+    btnFade.setAttribute("aria-pressed", String(fadeEnabled));
+    btnFade.setAttribute("aria-label", fadeEnabled ? "Modo transición: activado" : "Modo transición: desactivado");
+    if (menuFade) menuFade.setAttribute("aria-checked", String(fadeEnabled));
+  }
+
+  function toggleFade() {
+    fadeEnabled = !fadeEnabled;
+    window.Store.prefs.set("fade", fadeEnabled);
+    applyFadeUI();
+    if (fadeEnabled) {
+      updateFade();
+      startFadeLoop();
+    } else {
+      fadeGain = 1;
+      applyVolume();
+    }
+    showToast(fadeEnabled ? "Modo transición activado · fade de 5 s" : "Modo transición desactivado");
+  }
+
+  /* ---------- Modos de interfaz ---------- */
+  let themeTimer = null;
+
+  function applyTheme(name, { animate = true } = {}) {
+    if (!THEMES[name]) name = "dark";
+    const root = document.documentElement;
+
+    if (animate) {
+      root.classList.add("theme-switching");
+      clearTimeout(themeTimer);
+      themeTimer = setTimeout(() => root.classList.remove("theme-switching"), 700);
+    }
+
+    root.dataset.theme = name;
+    if (themeMeta) themeMeta.setAttribute("content", THEMES[name].color);
+
+    themeMenu.querySelectorAll("[data-theme-option]").forEach((opt) => {
+      opt.setAttribute("aria-checked", String(opt.dataset.themeOption === name));
+    });
+  }
+
+  function setTheme(name) {
+    if (!THEMES[name]) return;
+    if (document.documentElement.dataset.theme === name) return;
+    applyTheme(name);
+    window.Store.prefs.set("theme", name);
+    showToast(`${THEMES[name].label} activado`);
+  }
+
+  function setThemeMenuOpen(open) {
+    themeMenu.hidden = !open;
+    btnTheme.setAttribute("aria-expanded", String(open));
+    if (open) {
+      const checked = themeMenu.querySelector('[aria-checked="true"]') || themeMenu.querySelector(".theme-option");
+      if (checked) checked.focus();
+    }
+  }
+
+  btnTheme.addEventListener("click", () => setThemeMenuOpen(themeMenu.hidden));
+
+  themeMenu.addEventListener("click", (e) => {
+    const opt = e.target.closest("[data-theme-option]");
+    if (opt) {
+      setTheme(opt.dataset.themeOption);
+      setThemeMenuOpen(false);
+      btnTheme.focus();
+    }
+  });
+
+  menuFade.addEventListener("click", toggleFade);
+  btnFade.addEventListener("click", toggleFade);
+
+  // Navegación con flechas dentro del menú
+  themeMenu.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const items = Array.from(themeMenu.querySelectorAll(".theme-option"));
+    const idx = items.indexOf(document.activeElement);
+    const next = e.key === "ArrowDown" ? (idx + 1) % items.length : (idx - 1 + items.length) % items.length;
+    items[next].focus();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!themeMenu.hidden && !themePicker.contains(e.target)) setThemeMenuOpen(false);
+  });
 
   function updatePlayerUI(song) {
     playerTitle.textContent = song.title;
@@ -966,7 +1119,10 @@
     progress.classList.remove("dragging");
   });
 
-  audio.addEventListener("play", () => setPlayingUI(true));
+  audio.addEventListener("play", () => {
+    setPlayingUI(true);
+    startFadeLoop();
+  });
   audio.addEventListener("pause", () => setPlayingUI(false));
   audio.addEventListener("playing", () => { consecutiveErrors = 0; });
 
@@ -975,6 +1131,7 @@
   });
 
   audio.addEventListener("timeupdate", () => {
+    if (fadeEnabled) updateFade();
     if (isDraggingProgress || !Number.isFinite(audio.duration)) return;
     setProgressUI((audio.currentTime / audio.duration) * 100);
     timeCurrent.textContent = formatTime(audio.currentTime);
@@ -1016,8 +1173,13 @@
 
   let lastVolume = Number(volume.value);
 
+  // Volumen real = volumen del usuario × ganancia del fade
+  function applyVolume() {
+    audio.volume = Math.min(1, Math.max(0, userVolume * fadeGain));
+  }
+
   function updateVolumeUI() {
-    const level = audio.muted ? 0 : audio.volume;
+    const level = audio.muted ? 0 : userVolume;
     volume.value = level;
     volume.style.setProperty("--vol", `${level * 100}%`);
     const silent = level === 0;
@@ -1027,16 +1189,18 @@
 
   volume.addEventListener("input", () => {
     audio.muted = false;
-    audio.volume = Number(volume.value);
-    if (audio.volume > 0) lastVolume = audio.volume;
-    window.Store.prefs.set("vol", audio.volume);
+    userVolume = Number(volume.value);
+    if (userVolume > 0) lastVolume = userVolume;
+    applyVolume();
+    window.Store.prefs.set("vol", userVolume);
     updateVolumeUI();
   });
 
   btnMute.addEventListener("click", () => {
-    if (audio.muted || audio.volume === 0) {
+    if (audio.muted || userVolume === 0) {
       audio.muted = false;
-      audio.volume = lastVolume || 0.8;
+      if (userVolume === 0) userVolume = lastVolume || 0.8;
+      applyVolume();
     } else {
       audio.muted = true;
     }
@@ -1127,11 +1291,20 @@
   }
 
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !themeMenu.hidden) {
+      setThemeMenuOpen(false);
+      btnTheme.focus();
+      return;
+    }
+
     const tag = document.activeElement.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA") {
       if (e.key === "Escape") document.activeElement.blur();
       return;
     }
+
+    // Dentro del menú de modos, Espacio/Enter activan la opción enfocada
+    if (themePicker.contains(document.activeElement)) return;
 
     if (e.code === "Space") {
       e.preventDefault();
@@ -1143,6 +1316,8 @@
       toggleShuffle();
     } else if (e.key.toLowerCase() === "r") {
       cycleRepeatMode();
+    } else if (e.key.toLowerCase() === "t") {
+      toggleFade();
     } else if (e.key.toLowerCase() === "m") {
       btnMute.click();
     } else if (e.key === "ArrowRight") {
