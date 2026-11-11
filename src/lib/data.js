@@ -23,6 +23,22 @@ const SUPABASE_CONFIG = {
 export const isSupabaseEnabled = () =>
   Boolean(SUPABASE_CONFIG.url && SUPABASE_CONFIG.anonKey);
 
+/* ---------- Preconexión al servidor de Supabase ----------
+ * Abre DNS + TLS por adelantado para que el primer play no espere el
+ * handshake. Dos variantes: con CORS (fetch de la API) y sin CORS (<audio>).
+ */
+(function preconnect() {
+  if (!isSupabaseEnabled() || typeof document === "undefined") return;
+  const origin = new URL(SUPABASE_CONFIG.url).origin;
+  [true, false].forEach((cors) => {
+    const link = document.createElement("link");
+    link.rel = "preconnect";
+    link.href = origin;
+    if (cors) link.crossOrigin = "anonymous";
+    document.head.appendChild(link);
+  });
+})();
+
 export const slugify = (s) =>
   String(s)
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")

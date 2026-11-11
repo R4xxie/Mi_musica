@@ -1283,7 +1283,6 @@ input {
 /* =====================================================================
    MODOS DE INTERFAZ
    Básicos: dark (por defecto) · light
-   Especiales: halloween (oscuro) · criolla (claro)
    ===================================================================== */
 
 /* ---------- Modo claro ---------- */
@@ -1325,171 +1324,6 @@ input {
   --shadow-color: rgba(30, 30, 60, 0.16);
 }
 
-/* ---------- Modo Halloween (oscuro) ---------- */
-[data-theme="halloween"] {
-  color-scheme: dark;
-  --bg: #0b0710;
-  --bg-sidebar: #110a19;
-  --bg-card: rgba(178, 60, 255, 0.05);
-  --bg-card-hover: rgba(255, 122, 24, 0.09);
-  --surface: #1a1024;
-  --surface-hover: #261633;
-  --border-subtle: rgba(255, 140, 40, 0.12);
-  --border-focus: rgba(255, 140, 40, 0.38);
-  --text: #fff3e6;
-  --text-strong: #fff3e6;
-  --text-muted: #bba5c6;
-  --text-subtle: #7d6888;
-  --accent: #ff7a18;
-  --accent-glow: rgba(255, 122, 24, 0.42);
-  --accent-gradient: linear-gradient(135deg, #ff7a18 0%, #b23cff 100%);
-  --fav-color: #ff5e1a;
-  --hover-bg: rgba(178, 60, 255, 0.08);
-  --hover-bg-strong: rgba(178, 60, 255, 0.14);
-  --active-bg: rgba(178, 60, 255, 0.22);
-  --accent-soft: rgba(255, 122, 24, 0.14);
-  --ambient-glow: rgba(255, 122, 24, 0.14);
-  --ambient-glow-2: rgba(178, 60, 255, 0.2);
-  --topbar-bg: rgba(11, 7, 16, 0.78);
-  --player-bg: rgba(17, 10, 25, 0.96);
-  --popover-bg: rgba(26, 16, 36, 0.97);
-  --cover-bg: #1d1229;
-  --track-bg: rgba(255, 255, 255, 0.1);
-  --buffer-bg: rgba(178, 60, 255, 0.28);
-  --knob: #ffb36b;
-  --ctrl-main-bg: #ff7a18;
-  --ctrl-main-fg: #140a1c;
-  --scrollbar: rgba(178, 60, 255, 0.35);
-  --fav-gradient: linear-gradient(135deg, #ff7a18 0%, #6d1fb8 100%);
-  --fav-card-bg: linear-gradient(145deg, rgba(255, 122, 24, 0.18) 0%, rgba(17, 10, 25, 0.75) 100%);
-  --shadow-color: rgba(0, 0, 0, 0.6);
-  --display-font: "Creepster", "Outfit", cursive;
-}
-
-[data-theme="halloween"] .section-title,
-[data-theme="halloween"] .logo > span:last-child {
-  font-family: var(--display-font);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: #ffa04d;
-  text-shadow: 0 0 18px rgba(255, 122, 24, 0.45);
-}
-
-[data-theme="halloween"] .pl-header-title {
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  text-shadow: 0 0 24px rgba(178, 60, 255, 0.5);
-}
-
-[data-theme="halloween"] .logo-icon {
-  animation: pumpkin-glow 3s ease-in-out infinite;
-}
-
-@keyframes pumpkin-glow {
-  0%, 100% { box-shadow: 0 4px 12px rgba(255, 122, 24, 0.4); }
-  45%      { box-shadow: 0 4px 22px rgba(255, 122, 24, 0.85); }
-  50%      { box-shadow: 0 4px 8px rgba(255, 122, 24, 0.25); }
-  55%      { box-shadow: 0 4px 22px rgba(255, 122, 24, 0.85); }
-}
-
-/* ---------- Modo Canción Criolla (claro) ---------- */
-[data-theme="criolla"] {
-  color-scheme: light;
-  --bg: #fbf3e6;
-  --bg-sidebar: #fffaf1;
-  --bg-card: rgba(130, 50, 20, 0.04);
-  --bg-card-hover: rgba(130, 50, 20, 0.08);
-  --surface: #f1e3cc;
-  --surface-hover: #e9d6b8;
-  --border-subtle: rgba(130, 50, 20, 0.13);
-  --border-focus: rgba(130, 50, 20, 0.32);
-  --text: #2b1a12;
-  --text-strong: #22130c;
-  --text-muted: #6e5243;
-  --text-subtle: #a28574;
-  --accent: #c8102e;
-  --accent-glow: rgba(200, 16, 46, 0.26);
-  --accent-gradient: linear-gradient(135deg, #c8102e 0%, #d8952b 100%);
-  --fav-color: #c8102e;
-  --hover-bg: rgba(130, 50, 20, 0.06);
-  --hover-bg-strong: rgba(130, 50, 20, 0.1);
-  --active-bg: rgba(130, 50, 20, 0.15);
-  --accent-soft: rgba(200, 16, 46, 0.09);
-  --ambient-glow: rgba(216, 149, 43, 0.22);
-  --ambient-glow-2: rgba(200, 16, 46, 0.1);
-  --topbar-bg: rgba(251, 243, 230, 0.84);
-  --player-bg: rgba(255, 250, 241, 0.96);
-  --popover-bg: rgba(255, 250, 241, 0.98);
-  --cover-bg: #ecdbc0;
-  --track-bg: rgba(130, 50, 20, 0.14);
-  --buffer-bg: rgba(130, 50, 20, 0.22);
-  --knob: #7a2a14;
-  --ctrl-main-bg: #c8102e;
-  --ctrl-main-fg: #ffffff;
-  --scrollbar: rgba(130, 50, 20, 0.28);
-  --fav-gradient: linear-gradient(135deg, #c8102e 0%, #7a1020 100%);
-  --fav-card-bg: linear-gradient(145deg, rgba(200, 16, 46, 0.12) 0%, rgba(255, 250, 241, 0.88) 100%);
-  --shadow-color: rgba(90, 40, 15, 0.18);
-  --display-font: "Playfair Display", Georgia, serif;
-}
-
-[data-theme="criolla"] .section-title,
-[data-theme="criolla"] .logo > span:last-child {
-  font-family: var(--display-font);
-  font-style: italic;
-  color: #8f1022;
-}
-
-[data-theme="criolla"] .sidebar {
-  /* Franja roja y blanca sutil, guiño a la bandera */
-  background:
-    linear-gradient(90deg, transparent calc(100% - 4px), rgba(200, 16, 46, 0.55) calc(100% - 4px)),
-    var(--bg-sidebar);
-}
-
-/* ---------- Decoraciones de los modos especiales ---------- */
-.theme-deco {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  display: none;
-}
-
-[data-theme="halloween"] .theme-deco,
-[data-theme="criolla"] .theme-deco {
-  display: block;
-}
-
-.theme-deco span {
-  position: absolute;
-  font-size: 3rem;
-  opacity: 0.14;
-  animation: deco-float 9s ease-in-out infinite;
-}
-
-.theme-deco span:nth-child(1) { top: 14%; right: 6%;  font-size: 3.4rem; }
-.theme-deco span:nth-child(2) { top: 46%; right: 22%; font-size: 2.2rem; animation-delay: -3s; animation-duration: 11s; }
-.theme-deco span:nth-child(3) { bottom: 18%; right: 9%; font-size: 4.2rem; animation-delay: -6s; }
-.theme-deco span:nth-child(4) { top: 24%; left: 38%; font-size: 1.8rem; animation-delay: -1.5s; animation-duration: 13s; }
-
-[data-theme="halloween"] .theme-deco span:nth-child(1)::before { content: "🦇"; }
-[data-theme="halloween"] .theme-deco span:nth-child(2)::before { content: "🦇"; }
-[data-theme="halloween"] .theme-deco span:nth-child(3)::before { content: "🎃"; }
-[data-theme="halloween"] .theme-deco span:nth-child(4)::before { content: "🕸️"; }
-
-[data-theme="criolla"] .theme-deco span { opacity: 0.12; }
-[data-theme="criolla"] .theme-deco span:nth-child(1)::before { content: "🎸"; }
-[data-theme="criolla"] .theme-deco span:nth-child(2)::before { content: "🌹"; }
-[data-theme="criolla"] .theme-deco span:nth-child(3)::before { content: "🎶"; }
-[data-theme="criolla"] .theme-deco span:nth-child(4)::before { content: "💃"; }
-
-@keyframes deco-float {
-  0%, 100% { transform: translate(0, 0) rotate(-6deg); }
-  50%      { transform: translate(-14px, -22px) rotate(6deg); }
-}
-
 /* Transición suave de colores al cambiar de modo */
 html.theme-switching,
 html.theme-switching *,
@@ -1497,11 +1331,6 @@ html.theme-switching *::before,
 html.theme-switching *::after {
   transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease,
               box-shadow 0.6s ease, fill 0.6s ease !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-deco span,
-  [data-theme="halloween"] .logo-icon { animation: none; }
 }
 
 /* ---------- Selector de modos (topbar) ---------- */
@@ -1591,8 +1420,6 @@ html.theme-switching *::after {
 
 .swatch-dark      { background: linear-gradient(135deg, #09090e 0%, #22121c 60%, #ff2a5f 140%); }
 .swatch-light     { background: linear-gradient(135deg, #ffffff 0%, #ececf3 60%, #ff2a5f 160%); }
-.swatch-halloween { background: linear-gradient(135deg, #0b0710 0%, #3a1360 60%, #ff7a18 130%); }
-.swatch-criolla   { background: linear-gradient(135deg, #fffaf1 0%, #f1dcb6 55%, #c8102e 140%); }
 .swatch-fade      { background: var(--accent-gradient); color: #fff; }
 
 .theme-option-text {

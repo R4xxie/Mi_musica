@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { usePlayer } from "../context/PlayerContext.jsx";
 import { useFavorites } from "../context/LibraryContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
@@ -36,12 +37,26 @@ export function FavButton({ song, size = 20, toastMessages, className = "icon-bt
 
 /* ---------- Fila de canción ---------- */
 function SongRow({ song, index, showIndex, onPlay }) {
-  const { currentSong, isPlaying } = usePlayer();
+  const { currentSong, isPlaying, prefetch } = usePlayer();
   const isActive = currentSong?.id === song.id;
   const showPause = isActive && isPlaying;
+  const hoverTimer = useRef(0);
+
+  // Precarga el audio si el puntero se queda un momento sobre la fila
+  const onEnter = () => {
+    clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => prefetch(song), 150);
+  };
+  const onLeave = () => clearTimeout(hoverTimer.current);
+  useEffect(() => () => clearTimeout(hoverTimer.current), []);
 
   return (
-    <div className={`song-row${isActive ? " active" : ""}${showPause ? " is-playing" : ""}`} data-song-id={song.id}>
+    <div
+      className={`song-row${isActive ? " active" : ""}${showPause ? " is-playing" : ""}`}
+      data-song-id={song.id}
+      onPointerEnter={onEnter}
+      onPointerLeave={onLeave}
+    >
       <div className="song-index" onClick={onPlay}>
         <span className="song-index-num">{showIndex ? index + 1 : "•"}</span>
         <span className="song-play-icon">

@@ -19,8 +19,9 @@ function useAudioTime(audio) {
       }
       setT({ current: audio.currentTime, duration: d, buffered });
     };
-    const events = ["timeupdate", "loadedmetadata", "durationchange", "emptied", "seeked"];
+    const events = ["timeupdate", "loadedmetadata", "durationchange", "emptied", "seeked", "progress"];
     events.forEach((ev) => audio.addEventListener(ev, update));
+    update(); // el deck activo cambia en cada canción (crossfade)
     return () => events.forEach((ev) => audio.removeEventListener(ev, update));
   }, [audio]);
   return t;
@@ -142,7 +143,7 @@ export default function Player() {
             type="button"
             aria-label={fadeEnabled ? "Modo transición: activado" : "Modo transición: desactivado"}
             aria-pressed={String(fadeEnabled)}
-            title="Modo transición: fade de 5 s (T)"
+            title="Modo transición: crossfade de 5 s (T)"
             onClick={toggleFade}
           >
             <IconFade size={20} />

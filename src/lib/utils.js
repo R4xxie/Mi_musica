@@ -17,13 +17,13 @@ export const FALLBACK_COVER = "data:image/svg+xml;charset=utf-8," + encodeURICom
 
 // Modos de interfaz disponibles
 export const THEMES = {
-  dark:      { label: "Modo oscuro",             color: "#09090e" },
-  light:     { label: "Modo claro",              color: "#f4f4f8" },
-  halloween: { label: "Modo Halloween 🎃",       color: "#0b0710" },
-  criolla:   { label: "Modo Canción Criolla 🎸", color: "#fbf3e6" },
+  dark:  { label: "Modo oscuro", color: "#09090e" },
+  light: { label: "Modo claro",  color: "#f4f4f8" },
 };
 
+// Modo transición: duración del fade / crossfade y volumen mínimo (30 %)
 export const FADE_SECONDS = 5;
+export const FADE_MIN_GAIN = 0.3;
 
 export const formatTime = (s) => {
   if (!Number.isFinite(s) || s < 0) return "0:00";

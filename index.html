@@ -8,14 +8,14 @@
   <title>Mi Música</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Creepster&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
     /* Aplica el modo de interfaz guardado antes de pintar (evita parpadeo) */
     (function () {
       try {
         var m = document.cookie.match(/(?:^|; )mm_prefs=([^;]*)/);
         var p = m ? JSON.parse(decodeURIComponent(m[1])) : {};
-        if (p.theme) document.documentElement.setAttribute("data-theme", p.theme);
+        if (p.theme === "light" || p.theme === "dark") document.documentElement.setAttribute("data-theme", p.theme);
       } catch (e) {}
     })();
   </script>

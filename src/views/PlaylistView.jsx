@@ -57,7 +57,7 @@ function usePlaylistData(playlistId) {
 export default function PlaylistView() {
   const { id: playlistId = "" } = useParams();
   const data = usePlaylistData(playlistId);
-  const { currentSong, isPlaying, togglePlay, playQueue } = usePlayer();
+  const { currentSong, isPlaying, togglePlay, playQueue, prefetch } = usePlayer();
   const { showToast } = useToast();
 
   const [dlLabel, setDlLabel] = useState("Descargar ZIP");
@@ -134,7 +134,7 @@ export default function PlaylistView() {
             {isFav && <span>• Persistido con Cookies 🍪</span>}
           </div>
           <div className="pl-header-actions">
-            <button className="btn btn-primary" id="btn-play-playlist" type="button" disabled={empty} aria-label={showPause ? "Pausar" : "Reproducir todo"} onClick={onPlayAll}>
+            <button className="btn btn-primary" id="btn-play-playlist" type="button" disabled={empty} aria-label={showPause ? "Pausar" : "Reproducir todo"} onClick={onPlayAll} onPointerEnter={() => !isActivePlaylist && prefetch(list[0])}>
               {showPause ? <IconPause className="pl-btn-icon-pause" size={20} /> : <IconPlay className="pl-btn-icon-play" size={20} />}
               <span id="btn-play-playlist-text">{showPause ? "Pausar" : "Reproducir todo"}</span>
             </button>

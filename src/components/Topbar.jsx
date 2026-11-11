@@ -8,12 +8,9 @@ import { useActiveRoute } from "./Sidebar.jsx";
 import { IconBack, IconCheck, IconFade, IconForward, IconPalette, IconSearch } from "./Icons.jsx";
 
 const THEME_OPTIONS = [
-  { heading: "Básicos" },
+  { heading: "Tema" },
   { id: "dark", emoji: "🌙", name: "Modo oscuro", desc: "Elegante y nocturno" },
   { id: "light", emoji: "☀️", name: "Modo claro", desc: "Limpio y luminoso" },
-  { heading: "Especiales" },
-  { id: "halloween", emoji: "🎃", name: "Modo Halloween", desc: "Oscuro, calabazas y murciélagos" },
-  { id: "criolla", emoji: "🎸", name: "Modo Canción Criolla", desc: "Claro, cálido y jaranero" },
 ];
 
 /* ---------- Modos de interfaz ---------- */
@@ -149,7 +146,7 @@ function ThemePicker() {
           </span>
           <span className="theme-option-text">
             <span className="theme-option-name">Modo transición</span>
-            <span className="theme-option-desc">Fade in y fade out de 5 s</span>
+            <span className="theme-option-desc">Crossfade de 5 s entre canciones</span>
           </span>
           <span className="switch" aria-hidden="true"></span>
         </button>

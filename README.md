@@ -35,6 +35,8 @@ Incorpora un sistema de navegación por rutas basado en Hash (SPA), persistencia
 - **Controles Completos**: Barra de progreso con arrastre táctil interactivo, control de volumen y estado de buffer.
 - **Modo Aleatorio (Shuffle)**: Mezcla inteligente de la cola de reproducción sin interrumpir la pista actual.
 - **Modos de Repetición (Repeat)**: Ciclo entre apagado, repetir toda la lista o repetir la canción actual en bucle.
+- **Modo Transición (Crossfade)**: El final de una canción se mezcla con el inicio de la siguiente durante 5 s (volumen de 30 % a 100 %).
+- **Play instantáneo**: La siguiente canción de la cola y la que tienes bajo el cursor se precargan en segundo plano.
 - **MediaSession API**: Muestra el título, artista, álbum y carátula en la pantalla de bloqueo de Android/iOS y en teclados o auriculares con controles multimedia.
 
 ### 💖 Colección Personal y Preferencias

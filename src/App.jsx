@@ -98,7 +98,6 @@ export default function App() {
   return (
     <>
       <div className="ambient" aria-hidden="true"></div>
-      <div className="theme-deco" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
       <div className="app">
         <Sidebar />

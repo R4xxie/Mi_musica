@@ -1,35 +1,52 @@
 import { createContext, useContext, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import Store from "../lib/storage.js";
-import { FADE_SECONDS, FALLBACK_COVER, shuffleArray } from "../lib/utils.js";
+import { FADE_MIN_GAIN, FADE_SECONDS, FALLBACK_COVER, shuffleArray } from "../lib/utils.js";
 import { useToast } from "./ToastContext.jsx";
 import { useLibrary } from "./LibraryContext.jsx";
 
 const PlayerContext = createContext(null);
 
 /*
- * Motor de reproducción.
- * El estado "mutable" (cola, índice, ganancia del fade…) vive en un ref para
- * que los manejadores de eventos del <audio> nunca lean valores obsoletos;
- * `rerender()` sincroniza la interfaz cuando algo visible cambia.
+ * Motor de reproducción con un pool de 3 elementos <audio> ("decks"):
+ *   - current:  el que suena y controla la interfaz
+ *   - outgoing: el que se está desvaneciendo durante un crossfade
+ *   - el resto: precargan la siguiente canción de la cola y la canción
+ *               sobre la que pasa el mouse, para que el play sea inmediato.
+ *
+ * Modo transición: cada deck calcula su volumen según su posición:
+ *   - primeros 5 s  -> sube de 30 % a 100 %
+ *   - últimos 5 s   -> baja de 100 % a 30 %
+ * Cuando a la canción le quedan 5 s, la siguiente arranca en otro deck y
+ * ambas se superponen (crossfade).
+ *
+ * El estado mutable vive en un ref para que los manejadores de eventos del
+ * <audio> nunca lean valores obsoletos; `rerender()` sincroniza la interfaz.
  */
+const POOL_SIZE = 3;
+
+function createDeck() {
+  const el = new Audio();
+  el.preload = "auto";
+  return el;
+}
+
 export function PlayerProvider({ children }) {
   const { showToast } = useToast();
   const { songs } = useLibrary();
   const songsRef = useRef(songs);
   songsRef.current = songs;
 
-  const audioRef = useRef(null);
-  if (!audioRef.current) {
-    audioRef.current = new Audio();
-    audioRef.current.preload = "metadata";
-  }
-  const audio = audioRef.current;
-
   const engRef = useRef(null);
   if (!engRef.current) {
     const savedVol = Number(Store.prefs.get("vol", 0.8));
     const userVolume = Number.isFinite(savedVol) ? Math.min(1, Math.max(0, savedVol)) : 0.8;
+    const pool = Array.from({ length: POOL_SIZE }, createDeck);
     engRef.current = {
+      pool,
+      current: pool[0],    // Deck que suena
+      outgoing: null,      // Deck saliendo durante el crossfade
+      nextDeck: null,      // Deck con la siguiente canción precargada
+      hoverDeck: null,     // Deck con la canción precargada al pasar el mouse
       queue: [],           // Canciones en cola de reproducción
       originalQueue: [],   // Cola original antes de mezclar (shuffle)
       index: -1,
@@ -38,9 +55,10 @@ export function PlayerProvider({ children }) {
       fade: !!Store.prefs.get("fade", false),
       userVolume,          // Volumen elegido por el usuario (slider)
       lastVolume: userVolume > 0 ? userVolume : 0.8,
-      fadeGain: 1,         // Multiplicador 0..1 aplicado por el fade
-      fadeRaf: 0,
+      muted: false,
+      raf: 0,
       errors: 0,
+      preloadTimer: 0,
     };
   }
   const eng = engRef.current;
@@ -54,64 +72,157 @@ export function PlayerProvider({ children }) {
     const currentSong = () =>
       eng.index >= 0 && eng.index < eng.queue.length ? eng.queue[eng.index] : null;
 
-    // Volumen real = volumen del usuario × ganancia del fade
-    const applyVolume = () => {
-      audio.volume = Math.min(1, Math.max(0, eng.userVolume * eng.fadeGain));
+    /* ---------- Decks ---------- */
+    const songIdOf = (el) => el.dataset.songId || "";
+    const isBusy = (el) => el === eng.current || el === eng.outgoing;
+    const idleDecks = () => eng.pool.filter((el) => !isBusy(el));
+    const holds = (el, song) => songIdOf(el) === song.id && !el.error;
+
+    const loadInto = (el, song) => {
+      el.pause();
+      el.dataset.songId = song.id;
+      el.src = song.src;           // dispara la descarga (preload="auto")
     };
 
-    /* ---------- Modo transición: fade in / fade out de 5 s ----------
-     * La ganancia se calcula a partir de la posición de la canción:
-     *   - primeros 5 s  -> sube de 0 a 1 (fade in)
-     *   - últimos 5 s   -> baja de 1 a 0 (fade out)
-     * Así funciona igual al saltar, adelantar o repetir.
-     */
-    const computeFadeGain = () => {
+    const stopDeck = (el) => {
+      if (!el) return;
+      el.pause();
+      try { el.currentTime = 0; } catch { /* sin metadatos aún */ }
+    };
+
+    /* ---------- Volumen y fade ---------- */
+    const gainOf = (el) => {
       if (!eng.fade) return 1;
-      const t = audio.currentTime || 0;
-      const d = audio.duration;
-      if (!Number.isFinite(d) || d <= 0) return Math.min(1, t / FADE_SECONDS);
-      const len = Math.min(FADE_SECONDS, d / 2); // canciones muy cortas
-      return Math.max(0, Math.min(1, t / len, (d - t) / len));
+      const t = el.currentTime || 0;
+      const d = el.duration;
+      const len = Number.isFinite(d) && d > 0 ? Math.min(FADE_SECONDS, d / 2) : FADE_SECONDS;
+      const progress = Number.isFinite(d) && d > 0 ? Math.min(t / len, (d - t) / len) : t / len;
+      return FADE_MIN_GAIN + (1 - FADE_MIN_GAIN) * Math.max(0, Math.min(1, progress));
     };
 
-    const updateFade = () => {
-      eng.fadeGain = computeFadeGain();
-      applyVolume();
+    // Volumen real = volumen del usuario × ganancia del fade (por deck)
+    const applyVolume = () => {
+      eng.pool.forEach((el) => {
+        el.volume = Math.min(1, Math.max(0, eng.userVolume * gainOf(el)));
+        el.muted = eng.muted;
+      });
     };
 
-    // requestAnimationFrame para suavidad; timeupdate sirve de respaldo
-    // cuando la pestaña está en segundo plano (rAF se pausa).
-    const fadeLoop = () => {
-      updateFade();
-      eng.fadeRaf = eng.fade && !audio.paused ? requestAnimationFrame(fadeLoop) : 0;
-    };
-    const startFadeLoop = () => {
-      if (eng.fade && !eng.fadeRaf) eng.fadeRaf = requestAnimationFrame(fadeLoop);
+    /* ---------- Cola ---------- */
+    const nextIndex = () => {
+      if (!eng.queue.length) return -1;
+      if (eng.repeat === "one") return eng.index;
+      const i = eng.index + 1;
+      if (i < eng.queue.length) return i;
+      return eng.repeat === "all" ? 0 : -1;
     };
 
-    const play = () => {
-      setIsPlaying(true);
-      const p = audio.play();
-      if (p !== undefined) {
-        p.catch((err) => {
-          console.warn("Reproducción en espera o bloqueada:", err);
-          setIsPlaying(false);
-        });
+    /* ---------- Precarga ---------- */
+    const preloadNext = () => {
+      clearTimeout(eng.preloadTimer);
+      const i = nextIndex();
+      if (i < 0 || eng.repeat === "one") return;
+      const song = eng.queue[i];
+      const already = idleDecks().find((el) => holds(el, song));
+      if (already) {
+        eng.nextDeck = already;
+        return;
+      }
+      const idle = idleDecks();
+      const el = idle.find((d) => d !== eng.hoverDeck) || idle[0];
+      if (!el) return;
+      loadInto(el, song);
+      eng.nextDeck = el;
+      if (eng.hoverDeck === el) eng.hoverDeck = null;
+    };
+
+    // Espera a que la canción actual tenga buffer suficiente antes de
+    // descargar la siguiente, para no competir por el ancho de banda.
+    const schedulePreloadNext = (el) => {
+      clearTimeout(eng.preloadTimer);
+      const run = () => { if (eng.current === el) preloadNext(); };
+      if (el.readyState >= 4) {
+        eng.preloadTimer = setTimeout(run, 500);
+      } else {
+        el.addEventListener("canplaythrough", run, { once: true });
+        eng.preloadTimer = setTimeout(run, 8000);
       }
     };
 
-    const playCurrent = () => {
+    // Precarga al pasar el mouse / tocar una canción
+    const prefetch = (song) => {
+      if (!song || eng.pool.some((el) => holds(el, song))) return;
+      const el = idleDecks().find((d) => d !== eng.nextDeck);
+      if (!el) return;
+      loadInto(el, song);
+      eng.hoverDeck = el;
+    };
+
+    const deckFor = (song) => {
+      const ready = idleDecks().find((el) => holds(el, song));
+      if (ready) {
+        try { ready.currentTime = 0; } catch { /* noop */ }
+        return ready;
+      }
+      const idle = idleDecks();
+      const el = idle.find((d) => d !== eng.nextDeck && d !== eng.hoverDeck) ||
+        idle.find((d) => d !== eng.nextDeck) || idle[0];
+      loadInto(el, song);
+      return el;
+    };
+
+    /* ---------- Reproducción ---------- */
+    const play = (el) => {
+      setIsPlaying(true);
+      const p = el.play();
+      if (p === undefined) return;
+      p.catch((err) => {
+        if (err.name === "AbortError") return;
+        // iOS/Safari bloquea play() en un <audio> que nunca tuvo un gesto del
+        // usuario: en ese caso se reutiliza un deck ya desbloqueado.
+        const song = currentSong();
+        if (err.name === "NotAllowedError" && el === eng.current && song) {
+          const fallback = [eng.outgoing, ...eng.pool].find((d) => d && d !== el && d._unlocked);
+          if (fallback) {
+            if (eng.outgoing === fallback) eng.outgoing = null;
+            stopDeck(el);
+            loadInto(fallback, song);
+            eng.current = fallback;
+            applyVolume();
+            rerender();
+            fallback.play().catch(() => setIsPlaying(false));
+            return;
+          }
+        }
+        console.warn("Reproducción en espera o bloqueada:", err);
+        if (el === eng.current) setIsPlaying(false);
+      });
+    };
+
+    const playCurrent = ({ crossfade = false } = {}) => {
       const song = currentSong();
       if (!song) return;
       setError(false);
-      audio.src = song.src;
-      if (eng.fade) {
-        // Arranca en silencio para que el fade in empiece desde 0
-        eng.fadeGain = 0;
-        applyVolume();
+
+      const prev = eng.current;
+      if (eng.outgoing) {
+        stopDeck(eng.outgoing);
+        eng.outgoing = null;
       }
-      play();
+
+      const el = deckFor(song);
+      if (crossfade && prev !== el && !prev.paused) eng.outgoing = prev;
+      else if (prev !== el) stopDeck(prev);
+
+      eng.current = el;
+      if (eng.nextDeck === el) eng.nextDeck = null;
+      if (eng.hoverDeck === el) eng.hoverDeck = null;
+
+      applyVolume();
+      play(el);
+      startFadeLoop();
       Store.recent.push(song.id);
+      schedulePreloadNext(el);
 
       if ("mediaSession" in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -123,6 +234,38 @@ export function PlayerProvider({ children }) {
       rerender();
     };
 
+    /* ---------- Crossfade ---------- */
+    const maybeCrossfade = () => {
+      if (!eng.fade || eng.outgoing || eng.repeat === "one") return;
+      const el = eng.current;
+      if (el.paused || el.seeking) return;
+      const d = el.duration;
+      if (!Number.isFinite(d) || d <= 0) return;
+      const len = Math.min(FADE_SECONDS, d / 2);
+      if (d - el.currentTime > len) return;
+      const i = nextIndex();
+      if (i < 0) return;
+      eng.index = i;
+      playCurrent({ crossfade: true });
+    };
+
+    const tick = () => {
+      applyVolume();
+      maybeCrossfade();
+    };
+
+    // requestAnimationFrame para suavidad; timeupdate sirve de respaldo
+    // cuando la pestaña está en segundo plano (rAF se pausa).
+    const fadeLoop = () => {
+      tick();
+      const anyPlaying = eng.pool.some((el) => !el.paused);
+      eng.raf = eng.fade && anyPlaying ? requestAnimationFrame(fadeLoop) : 0;
+    };
+    const startFadeLoop = () => {
+      if (eng.fade && !eng.raf) eng.raf = requestAnimationFrame(fadeLoop);
+    };
+
+    /* ---------- Acciones públicas ---------- */
     const playQueue = (list, startIndex = 0) => {
       if (!list || !list.length) return;
       eng.originalQueue = list.slice();
@@ -143,9 +286,13 @@ export function PlayerProvider({ children }) {
         if (songsRef.current.length) playQueue(songsRef.current, 0);
         return;
       }
-      if (audio.paused) play();
-      else {
-        audio.pause();
+      if (eng.current.paused) {
+        play(eng.current);
+        if (eng.outgoing) eng.outgoing.play().catch(() => {});
+        startFadeLoop();
+      } else {
+        eng.current.pause();
+        eng.outgoing?.pause();
         setIsPlaying(false);
       }
     };
@@ -153,28 +300,24 @@ export function PlayerProvider({ children }) {
     const playNext = () => {
       if (!eng.queue.length) return;
       if (eng.repeat === "one") {
-        audio.currentTime = 0;
-        audio.play().catch(console.warn);
+        eng.current.currentTime = 0;
+        play(eng.current);
         return;
       }
-      const nextIdx = eng.index + 1;
-      if (nextIdx < eng.queue.length) {
-        eng.index = nextIdx;
-        playCurrent();
-      } else if (eng.repeat === "all") {
-        eng.index = 0;
+      const i = nextIndex();
+      if (i >= 0) {
+        eng.index = i;
         playCurrent();
       } else {
-        audio.pause();
-        audio.currentTime = 0;
+        stopDeck(eng.current);
         setIsPlaying(false);
       }
     };
 
     const playPrev = () => {
       if (!eng.queue.length) return;
-      if (audio.currentTime > 3) {
-        audio.currentTime = 0;
+      if (eng.current.currentTime > 3) {
+        eng.current.currentTime = 0;
         return;
       }
       eng.index = eng.index <= 0 ? (eng.repeat === "all" ? eng.queue.length - 1 : 0) : eng.index - 1;
@@ -195,6 +338,7 @@ export function PlayerProvider({ children }) {
         eng.index = current ? eng.queue.indexOf(current) : 0;
         showToast("Aleatorio desactivado");
       }
+      if (current) preloadNext();
       rerender();
     };
 
@@ -202,6 +346,7 @@ export function PlayerProvider({ children }) {
       eng.repeat = eng.repeat === "off" ? "all" : eng.repeat === "all" ? "one" : "off";
       Store.prefs.set("repeat", eng.repeat);
       showToast(eng.repeat === "one" ? "Repetir una canción" : eng.repeat === "all" ? "Repetir lista" : "Repetición apagada");
+      if (currentSong()) preloadNext();
       rerender();
     };
 
@@ -209,18 +354,18 @@ export function PlayerProvider({ children }) {
       eng.fade = !eng.fade;
       Store.prefs.set("fade", eng.fade);
       if (eng.fade) {
-        updateFade();
         startFadeLoop();
-      } else {
-        eng.fadeGain = 1;
-        applyVolume();
+      } else if (eng.outgoing) {
+        stopDeck(eng.outgoing);
+        eng.outgoing = null;
       }
-      showToast(eng.fade ? "Modo transición activado · fade de 5 s" : "Modo transición desactivado");
+      applyVolume();
+      showToast(eng.fade ? "Modo transición activado · crossfade de 5 s" : "Modo transición desactivado");
       rerender();
     };
 
     const setVolume = (v) => {
-      audio.muted = false;
+      eng.muted = false;
       eng.userVolume = v;
       if (v > 0) eng.lastVolume = v;
       applyVolume();
@@ -230,58 +375,70 @@ export function PlayerProvider({ children }) {
     };
 
     const toggleMute = () => {
-      if (audio.muted || eng.userVolume === 0) {
-        audio.muted = false;
+      if (eng.muted || eng.userVolume === 0) {
+        eng.muted = false;
         if (eng.userVolume === 0) eng.userVolume = eng.lastVolume || 0.8;
-        applyVolume();
       } else {
-        audio.muted = true;
+        eng.muted = true;
       }
-      setMuted(audio.muted);
+      applyVolume();
+      setMuted(eng.muted);
       rerender();
     };
 
     const seekBy = (delta) => {
-      if (Number.isFinite(audio.duration)) {
-        audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+      const el = eng.current;
+      if (Number.isFinite(el.duration)) {
+        el.currentTime = Math.min(el.duration, Math.max(0, el.currentTime + delta));
       }
     };
 
     return {
-      currentSong, applyVolume, updateFade, startFadeLoop,
+      currentSong, applyVolume, tick, startFadeLoop, prefetch,
       playQueue, togglePlay, playNext, playPrev,
       toggleShuffle, cycleRepeatMode, toggleFade, setVolume, toggleMute, seekBy,
     };
-  }, [audio, eng, showToast]);
+  }, [eng, showToast]);
 
-  /* ---------- Eventos del <audio> ---------- */
+  /* ---------- Eventos de los <audio> ---------- */
   useEffect(() => {
     actions.applyVolume();
+    const cleanups = eng.pool.map((el) => {
+      const onPlay = () => {
+        if (el === eng.current) setIsPlaying(true);
+        actions.startFadeLoop();
+      };
+      const onPause = () => { if (el === eng.current) setIsPlaying(false); };
+      const onPlaying = () => {
+        el._unlocked = true;
+        if (el === eng.current) eng.errors = 0;
+      };
+      const onTime = () => { if (eng.fade) actions.tick(); };
+      const onEnded = () => {
+        if (el === eng.outgoing) {
+          eng.outgoing = null;
+          el.pause();
+        } else if (el === eng.current) {
+          actions.playNext();
+        }
+      };
+      const onError = () => {
+        if (el !== eng.current || !el.getAttribute("src")) return;
+        console.error("Error al cargar pista:", el.src);
+        eng.errors++;
+        setIsPlaying(false);
+        if (eng.errors < eng.queue.length) {
+          actions.playNext();
+        } else {
+          eng.errors = 0;
+          setError(true);
+        }
+      };
 
-    const onPlay = () => { setIsPlaying(true); actions.startFadeLoop(); };
-    const onPause = () => setIsPlaying(false);
-    const onPlaying = () => { eng.errors = 0; };
-    const onTime = () => { if (eng.fade) actions.updateFade(); };
-    const onEnded = () => actions.playNext();
-    const onError = () => {
-      if (!audio.src) return;
-      console.error("Error al cargar pista:", audio.src);
-      eng.errors++;
-      setIsPlaying(false);
-      if (eng.errors < eng.queue.length) {
-        actions.playNext();
-      } else {
-        eng.errors = 0;
-        setError(true);
-      }
-    };
-
-    audio.addEventListener("play", onPlay);
-    audio.addEventListener("pause", onPause);
-    audio.addEventListener("playing", onPlaying);
-    audio.addEventListener("timeupdate", onTime);
-    audio.addEventListener("ended", onEnded);
-    audio.addEventListener("error", onError);
+      const handlers = { play: onPlay, pause: onPause, playing: onPlaying, timeupdate: onTime, ended: onEnded, error: onError };
+      Object.entries(handlers).forEach(([ev, fn]) => el.addEventListener(ev, fn));
+      return () => Object.entries(handlers).forEach(([ev, fn]) => el.removeEventListener(ev, fn));
+    });
 
     if ("mediaSession" in navigator) {
       navigator.mediaSession.setActionHandler("play", actions.togglePlay);
@@ -290,15 +447,8 @@ export function PlayerProvider({ children }) {
       navigator.mediaSession.setActionHandler("nexttrack", actions.playNext);
     }
 
-    return () => {
-      audio.removeEventListener("play", onPlay);
-      audio.removeEventListener("pause", onPause);
-      audio.removeEventListener("playing", onPlaying);
-      audio.removeEventListener("timeupdate", onTime);
-      audio.removeEventListener("ended", onEnded);
-      audio.removeEventListener("error", onError);
-    };
-  }, [audio, eng, actions]);
+    return () => cleanups.forEach((fn) => fn());
+  }, [eng, actions]);
 
   const currentSong = actions.currentSong();
 
@@ -308,7 +458,7 @@ export function PlayerProvider({ children }) {
 
   const value = {
     ...actions,
-    audio,
+    audio: eng.current,
     currentSong,
     queue: eng.queue,
     isPlaying,
