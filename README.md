@@ -2,14 +2,15 @@
 
 <div align="center">
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Responsive](https://img.shields.io/badge/Design-Responsive-blueviolet?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
 **Reproductor de música web moderno, ultrarrápido y responsivo con estética inspirada en plataformas de streaming.**  
-Construido 100% con Vanilla JavaScript, HTML5 y CSS3, sin frameworks pesados ni dependencias innecesarias.
+Construido con React + Vite y desplegado automáticamente en GitHub Pages mediante GitHub Actions.
 
 </div>
 
@@ -17,7 +18,7 @@ Construido 100% con Vanilla JavaScript, HTML5 y CSS3, sin frameworks pesados ni 
 
 ## 📖 Descripción
 
-**Mi Música** es una aplicación web estática de reproducción de audio diseñada para ofrecer una experiencia fluida, elegante y sin interrupciones tanto en dispositivos móviles como en ordenadores de escritorio.
+**Mi Música** es una aplicación web (SPA en React) de reproducción de audio diseñada para ofrecer una experiencia fluida, elegante y sin interrupciones tanto en dispositivos móviles como en ordenadores de escritorio.
 
 Incorpora un sistema de navegación por rutas basado en Hash (SPA), persistencia de preferencias por usuario en el navegador, descargas individuales y en lote (.zip con lista .m3u8), y soporte nativo con la API MediaSession para integración con pantallas de bloqueo y teclas multimedia.
 
@@ -40,73 +41,6 @@ Incorpora un sistema de navegación por rutas basado en Hash (SPA), persistencia
 - **Favoritos Dinámicos**: Marca canciones con un clic y accede a tu lista personalizada en tiempo real.
 - **Historial Reciente**: Registro de las últimas canciones escuchadas.
 - **Persistencia**: Recuerda volumen, estado de mute, modo aleatorio y modo de repetición para cada visitante.
-
-### 🔍 Búsqueda y Descargas
-- **Buscador en Tiempo Real**: Filtra instantáneamente por nombre de canción, artista o género con atajos de teclado rápidos.
-- **Descargas Individuales**: Guarda cualquier pista directamente en formato MP3.
-- **Empaquetado en Lote (ZIP + M3U8)**: Descarga listas completas generadas al vuelo en el navegador en un archivo `.zip` comprimido junto con su archivo de lista de reproducción `.m3u8`.
-
----
-
-## ⌨️ Atajos de Teclado
-
-Para facilitar el control de la reproducción en ordenadores, la aplicación incluye atajos globales:
-
-| Tecla | Acción |
-| :--- | :--- |
-| <kbd>Espacio</kbd> | Reproducir / Pausar |
-| <kbd>/</kbd> | Enfocar la barra de búsqueda |
-| <kbd>S</kbd> | Activar / Desactivar modo aleatorio (*Shuffle*) |
-| <kbd>R</kbd> | Alternar modo de repetición (*Off / All / One*) |
-| <kbd>M</kbd> | Silenciar / Restaurar volumen (*Mute*) |
-| <kbd>→</kbd> | Adelantar 5 segundos |
-| <kbd>←</kbd> | Retroceder 5 segundos |
-| <kbd>Esc</kbd> | Desenfocar el campo de búsqueda |
-
----
-
-## 📁 Estructura del Proyecto
-
-```text
-reproductor-musica/
-├── css/
-│   └── styles.css          # Estilos globales, variables CSS, layout y diseño responsivo
-├── data/
-│   └── db.json             # Catálogo de canciones y metadatos
-├── img/                    # Recursos visuales y carátulas
-├── js/
-│   ├── app.js              # Controlador principal, reproductor de audio y router SPA
-│   ├── data.js             # Capa desacoplada de origen de datos
-│   ├── storage.js          # Gestión de preferencias, favoritos e historial del usuario
-│   └── zip.js              # Generación de descargas ZIP y listas M3U8 en cliente
-├── index.html              # Estructura semántica principal de la aplicación
-└── README.md               # Documentación del proyecto
-```
-
----
-
-## 🛠️ Tecnologías Utilizadas
-
-- **HTML5**: Estructura semántica y elemento `<audio>`.
-- **CSS3**: Variables nativas, Flexbox, CSS Grid, Glassmorphism y animaciones aceleradas por hardware.
-- **JavaScript (ES6+)**: Lógica reactiva modular sin transpiladores ni frameworks.
-- **MediaSession API**: Integración con el sistema operativo y controles multimedia de dispositivos.
-- **JSZip**: Biblioteca cliente para compresión y generación de archivos `.zip`.
-- **Google Fonts (Outfit)**: Tipografía moderna y optimizada.
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones, reportes de errores y sugerencias son bienvenidos:
-
-1. Haz un **Fork** del proyecto.
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/NuevaCaracteristica`).
-3. Realiza los cambios necesarios y haz commit (`git commit -m 'feat: Agregar nueva funcionalidad'`).
-4. Sube tu rama (`git push origin feature/NuevaCaracteristica`).
-5. Abre un **Pull Request**.
-
----
 
 ## 📄 Licencia
 
