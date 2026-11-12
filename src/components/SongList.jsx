@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef } from "react";
 import { usePlayer } from "../context/PlayerContext.jsx";
 import { useFavorites } from "../context/LibraryContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
@@ -35,12 +35,11 @@ export function FavButton({ song, size = 20, toastMessages, className = "icon-bt
   );
 }
 
-/* ---------- Fila de canción ---------- */
-function SongRow({ song, index, showIndex, onPlay }) {
-  const { currentSong, isPlaying, prefetch } = usePlayer();
-  const isActive = currentSong?.id === song.id;
+/* ---------- Fila de canción (memoizada: solo se re-renderiza la fila activa) ---------- */
+const SongRow = memo(function SongRow({ song, index, showIndex, isActive, isPlaying, prefetch, onPlayIndex }) {
   const showPause = isActive && isPlaying;
   const hoverTimer = useRef(0);
+  const onClick = () => onPlayIndex(song, index);
 
   // Precarga el audio si el puntero se queda un momento sobre la fila
   const onEnter = () => {
@@ -57,15 +56,15 @@ function SongRow({ song, index, showIndex, onPlay }) {
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
     >
-      <div className="song-index" onClick={onPlay}>
+      <div className="song-index" onClick={onClick}>
         <span className="song-index-num">{showIndex ? index + 1 : "•"}</span>
         <span className="song-play-icon">
           <IconPlay className="song-icon-play" size={18} style={{ display: showPause ? "none" : "inline-block" }} />
           <IconPause className="song-icon-pause" size={18} style={{ display: showPause ? "inline-block" : "none" }} />
         </span>
       </div>
-      <div className="song-main" onClick={onPlay}>
-        <img className="song-thumb" src={song.cover || FALLBACK_COVER} alt="" loading="lazy" onError={coverFallback} />
+      <div className="song-main" onClick={onClick}>
+        <img className="song-thumb" src={song.cover || FALLBACK_COVER} alt="" loading="lazy" decoding="async" onError={coverFallback} />
         <div className="song-text">
           <p className="song-title">{song.title}</p>
           <p className="song-artist">
@@ -89,11 +88,20 @@ function SongRow({ song, index, showIndex, onPlay }) {
       <div className="song-duration">--:--</div>
     </div>
   );
-}
+});
 
 /* ---------- Lista de canciones ---------- */
 export default function SongList({ songs, showIndex = true }) {
-  const { currentSong, togglePlay, playQueue } = usePlayer();
+  const { currentSong, isPlaying, togglePlay, playQueue, prefetch } = usePlayer();
+  const activeId = currentSong?.id;
+  const stateRef = useRef({ songs, activeId, togglePlay, playQueue });
+  stateRef.current = { songs, activeId, togglePlay, playQueue };
+
+  const onPlayIndex = useCallback((song, index) => {
+    const { songs: list, activeId: curId, togglePlay: toggle, playQueue: play } = stateRef.current;
+    if (curId === song.id) toggle();
+    else play(list, index);
+  }, []);
 
   return (
     <div className="songs-list">
@@ -103,10 +111,10 @@ export default function SongList({ songs, showIndex = true }) {
           song={song}
           index={index}
           showIndex={showIndex}
-          onPlay={() => {
-            if (currentSong?.id === song.id) togglePlay();
-            else playQueue(songs, index);
-          }}
+          isActive={activeId === song.id}
+          isPlaying={activeId === song.id && isPlaying}
+          prefetch={prefetch}
+          onPlayIndex={onPlayIndex}
         />
       ))}
     </div>

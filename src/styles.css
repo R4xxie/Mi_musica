@@ -669,6 +669,8 @@ input {
   transition: var(--transition);
   user-select: none;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 58px;
 }
 
 .song-row:hover {

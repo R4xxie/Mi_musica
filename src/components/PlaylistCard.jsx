@@ -8,7 +8,7 @@ export default function PlaylistCard({ to, title, desc, cover, mosaic, isFav = f
     <Link className={`pl-card${isFav ? " is-fav" : ""}`} to={to}>
       <div className="pl-card-cover-wrap">
         {mosaic || (
-          <img className="pl-card-cover" src={cover || FALLBACK_COVER} alt={title} loading="lazy" onError={coverFallback} />
+          <img className="pl-card-cover" src={cover || FALLBACK_COVER} alt={title} loading="lazy" decoding="async" onError={coverFallback} />
         )}
         <div className="pl-card-overlay">
           <span className="pl-card-play-btn" aria-label={playLabel}>

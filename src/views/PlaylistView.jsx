@@ -122,7 +122,7 @@ export default function PlaylistView() {
           {isFav ? (
             <div className="fav-badge-mosaic"><IconHeartFill size={72} /></div>
           ) : (
-            <img className="pl-header-cover" src={firstCoverOf(list) || FALLBACK_COVER} alt={title} onError={coverFallback} />
+            <img className="pl-header-cover" src={firstCoverOf(list) || FALLBACK_COVER} alt={title} decoding="async" onError={coverFallback} />
           )}
         </div>
         <div className="pl-header-info">

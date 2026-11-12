@@ -29,7 +29,12 @@ export function LibraryProvider({ children }) {
   useEffect(() => {
     let cancelled = false;
     Store.userId();
-    loadLibrary()
+    loadLibrary({
+      // Datos nuevos de Supabase tras pintar desde la caché local
+      onUpdate: ({ songs, playlists }) => {
+        if (!cancelled) setState({ status: "ready", songs, playlists });
+      },
+    })
       .then(({ songs, playlists }) => {
         if (!cancelled) setState({ status: "ready", songs, playlists });
       })
@@ -42,9 +47,15 @@ export function LibraryProvider({ children }) {
 
   const value = useMemo(() => {
     const songMap = new Map(state.songs.map((s) => [s.id, s]));
-    const genrePlaylists = buildGenrePlaylists(state.songs);
     const resolve = (ids) => ids.map((id) => songMap.get(id)).filter(Boolean);
-    return { ...state, songMap, genrePlaylists, resolve };
+    // Portada y número de canciones precalculados (evita resolver en cada render)
+    const withMeta = (pl) => {
+      const list = resolve(pl.songIds);
+      return { ...pl, count: list.length, firstCover: list.find((s) => s.cover)?.cover || "" };
+    };
+    const genrePlaylists = buildGenrePlaylists(state.songs).map(withMeta);
+    const playlists = state.playlists.map(withMeta);
+    return { ...state, playlists, songMap, genrePlaylists, resolve };
   }, [state]);
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>;
@@ -65,9 +76,13 @@ function useStoreEvent(eventName) {
 
 export function useFavorites() {
   const version = useStoreEvent("store:favorites");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const ids = useMemo(() => Store.favorites.all(), [version]);
-  return { ids, has: (id) => ids.includes(String(id)), count: ids.length, toggle: Store.favorites.toggle };
+  // Set → comprobación O(1) por fila en listas largas
+  return useMemo(() => {
+    const ids = Store.favorites.all();
+    const set = new Set(ids);
+    return { ids, has: (id) => set.has(String(id)), count: ids.length, toggle: Store.favorites.toggle };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [version]);
 }
 
 export function useRecent() {

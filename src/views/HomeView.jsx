@@ -1,13 +1,17 @@
+import { useMemo } from "react";
 import { useFavorites, useLibrary, useRecent } from "../context/LibraryContext.jsx";
-import PlaylistCard, { firstCoverOf, playlistPath } from "../components/PlaylistCard.jsx";
+import PlaylistCard, { playlistPath } from "../components/PlaylistCard.jsx";
 import SongList from "../components/SongList.jsx";
 import { IconHeartFill, IconNote } from "../components/Icons.jsx";
 
 export default function HomeView() {
-  const { songs, playlists, genrePlaylists, songMap, resolve } = useLibrary();
+  const { songs, playlists, genrePlaylists, songMap } = useLibrary();
   const favs = useFavorites();
   const recentIds = useRecent();
-  const recentSongs = recentIds.map((id) => songMap.get(id)).filter(Boolean).slice(0, 6);
+  const recentSongs = useMemo(
+    () => recentIds.map((id) => songMap.get(id)).filter(Boolean).slice(0, 6),
+    [recentIds, songMap]
+  );
   const favCount = favs.count;
 
   return (
@@ -38,18 +42,15 @@ export default function HomeView() {
         />
 
         {/* Tarjetas de Playlists fijas */}
-        {playlists.map((pl) => {
-          const plSongs = resolve(pl.songIds);
-          return (
-            <PlaylistCard
-              key={pl.id}
-              to={playlistPath(pl.id)}
-              title={pl.name}
-              desc={pl.description || `${plSongs.length} canciones`}
-              cover={firstCoverOf(plSongs)}
-            />
-          );
-        })}
+        {playlists.map((pl) => (
+          <PlaylistCard
+            key={pl.id}
+            to={playlistPath(pl.id)}
+            title={pl.name}
+            desc={pl.description || `${pl.count} canciones`}
+            cover={pl.firstCover}
+          />
+        ))}
       </div>
 
       {/* Sección de Géneros Musicales Auto-detectados */}
@@ -57,18 +58,15 @@ export default function HomeView() {
         <>
           <h2 className="section-title">Estilos y Géneros (Auto-detectados)</h2>
           <div className="playlists-grid">
-            {genrePlaylists.map((g) => {
-              const gSongs = resolve(g.songIds);
-              return (
-                <PlaylistCard
-                  key={g.id}
-                  to={playlistPath(g.id)}
-                  title={g.name}
-                  desc={gSongs.length === 1 ? "1 canción disponible" : `${gSongs.length} canciones disponibles`}
-                  cover={firstCoverOf(gSongs)}
-                />
-              );
-            })}
+            {genrePlaylists.map((g) => (
+              <PlaylistCard
+                key={g.id}
+                to={playlistPath(g.id)}
+                title={g.name}
+                desc={g.count === 1 ? "1 canción disponible" : `${g.count} canciones disponibles`}
+                cover={g.firstCover}
+              />
+            ))}
           </div>
         </>
       )}
