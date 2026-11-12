@@ -90,6 +90,9 @@ async function fetchFromSupabase() {
     if (!plRes.ok) throw new Error(`Supabase playlists: HTTP ${plRes.status}`);
 
     const [rawSongs, rawPlaylists] = await Promise.all([songsRes.json(), plRes.json()]);
+    if (!Array.isArray(rawSongs) || rawSongs.length === 0) {
+      throw new Error("Supabase devolvió 0 canciones (tabla vacía o RLS activo sin política SELECT)");
+    }
     return mapSupabase(rawSongs, rawPlaylists);
   } finally {
     clearTimeout(timeout);
@@ -134,7 +137,9 @@ const cacheKey = () => `mm_lib_v1:${SUPABASE_CONFIG.url}:${SUPABASE_CONFIG.anonK
 function readCache() {
   try {
     const raw = localStorage.getItem(cacheKey());
-    return raw ? { text: raw, data: JSON.parse(raw) } : null;
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    return Array.isArray(data?.songs) && data.songs.length > 0 ? { text: raw, data } : null;
   } catch {
     return null;
   }
