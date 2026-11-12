@@ -16,7 +16,7 @@ const FETCH_TIMEOUT_MS = 8000;
 
 // --- CONFIGURACIÓN DE TU PROYECTO SUPABASE ---
 const SUPABASE_CONFIG = {
-  url: import.meta.env.VITE_SUPABASE_URL || "https://vjeknodqepfjlzkjanat.supabase.co", // URL de tu proyecto
+  url: import.meta.env.VITE_SUPABASE_URL || "https://gryvyterwkkdejmbtucc.supabase.co", // URL de tu proyecto
   anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_yTSQLOFwdfrNM6Z6-R8Mnw_LO0UF5sX", // Clave pública (publishable)
   bucket: import.meta.env.VITE_SUPABASE_BUCKET || "music",                              // Bucket de almacenamiento público
 };
